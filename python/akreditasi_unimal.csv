@@ -1,0 +1,54 @@
+Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8
+No;Program Pendidikan;Prodi;Peringkat;Nomor SK;Tahun SK;Masa Berlaku;Link Sertifikat
+;;;;;;;
+No Urut;Program Pendidikan;Program Studi (Prodi);Peringkat Akreditasi;Nomor SK Akreditasi;Tahun SK;Masa Berlaku Akreditasi;
+1;Sarjana;Teknik Sipil;Unggul;0830/SK/LAM Teknik/AS/XII/2024;2024;21 Desember 2024 s.d 20 Desember 2029;https://drive.google.com/file/d/14UwgSKioX72wj3Lfeu9nJsvZS9vlgAN2/view?usp=sharing
+2;Sarjana;Teknik Mesin;Baik Sekali;2611/SK/BAN-PT/AK-ISK/S/IV/2022;2022;26 April 2022 s.d 22 Maret 2027;https://drive.google.com/file/d/12VnupWBZEY5I-ZgiD0bTWOy3Py-c49lD/view?usp=sharing
+3;Sarjana;Teknik Industri;B;13774/SK/BAN-PT/Ak-PPJ/S/XII/2021;2021;11 Januari 2022 s.d 11 Januari 2027;https://drive.google.com/file/d/1weSr9Y4S0Lp6bDZqji--qtDIwL9RNN13/view?usp=sharing
+4;Sarjana;Teknik Kimia;Baik Sekali;11944/SK/BAN-PT/Ak-PPJ/S/X/2021;2021;21 Oktober 2021 s.d 21 Oktober 2026;https://drive.google.com/file/d/1Nmq-6Z6q7_2DCLUpo1buACpIZCDZ6ymR/view?usp=sharing
+5;Sarjana;Teknik Elektro;Baik Sekali;0151/SK/LAM Teknik/AS/XII/2022;2022;21 Desember 2022 s.d 20 Desember 2027;https://drive.google.com/file/d/1KjwxgfQJZMNVGfZyQqdRCzz16Qu_1Qh9/view?usp=sharing
+6;Sarjana;Arsitektur;Baik Sekali;3540/SK/BAN-PT/Ak-PPJ/S/VI/2022;2022;26 April 2022 s.d 26 April 2027;https://drive.google.com/file/d/1uX39GRg42VXHRPxPlbRJAGSp3uf6Aca3/view?usp=sharing
+7;Sarjana;Teknik Informatika;Baik Sekali;3063/SK/BAN-PT/Ak/S/VIII/2023;2023;01 Agustus 2023 s.d 01 Agustus 2028;https://drive.google.com/file/d/1BifPdnrt5MwAlGr9FLdqs2lDB_rVtElY/view?usp=sharing
+8;Sarjana;Sistem Informasi;Baik Sekali;035/SK/LAM-INFOKOM/Ak/5/XII/2022;2022;12 Desember 2022 s.d 12 Desember 2027;https://drive.google.com/file/d/1O4928_OtTRt-gAY7vfp-RvlLR7GXrmYn/view?usp=sharing
+9;Sarjana;Teknik Material;Baik;1896/SK/BAN-PT/Ak/S/V/2023;2023;23 Mei 2023 s.d 23 Mei 2028;https://drive.google.com/file/d/1NbSWUp0Xp_2uappZMkXDJ3XC2IuVV4gI/view?usp=sharing
+10;Sarjana;Teknik Logistik;Baik;0168/SK/LAM Teknik/AS/XII/2022;2022;21 Desember 2022 s.d 20 Desember 2027;https://drive.google.com/file/d/1bemkpPn19nYVGOqQm_gqVp54P6vau_q9/view?usp=sharing
+11;Profesi;Program Profesi Insinyur;Baik;0382/SK/LAM Teknik/PB.PI/VII/2025;2025;2 Tahun Sejak Penerimaan Mahasiswa Baru;https://drive.google.com/file/d/1fIjqfxqKf4MKcV8aw7T6EATn2_B_oZk9/view?usp=sharing
+12;Magister;Teknik Energi Terbarukan;Unggul;0242/SK/LAM Teknik/AM/IV/2025;2025;21 April 2025 s.d 20 April 2030;https://drive.google.com/file/d/1nCAO04NqNQniJTtpBbBLXKdLYWAauwfr/view?usp=sharing
+13;Magister;Teknologi Informasi;Baik;009/SK/LAM-INFOKOM/Ak.P/M/XII/2022;2022;05 Desember 2022 s.d 05 Desember 2027;https://drive.google.com/file/d/1oQew-GyYuYS5W-z6I2bpmal42FYxFX5f/view?usp=sharing
+14;Magister;Teknik Sipil;Baik Sekali;0117/SK/LAM Teknik/AM/XII/2022;2022;21 Desember 2022 s.d 20 Desember 2027;https://drive.google.com/file/d/1uzG9lTHM_HPUCaC1ysxKAz1mU2iiOydB/view?usp=sharing
+15;Sarjana;Administrasi Publik;Baik Sekali;5496/SK/BAN-PT/Ak/S/VIII/2024;2024;19 Agustus 2024 s.d 19 Agustus 2029;https://drive.google.com/file/d/1xNkH-DTxDfOyXa683VyH2Xkq29pMyJ6a/view?usp=sharing
+16;Sarjana;Ilmu Politik;Baik Sekali;6811/SK/BAN-PT/Ak.KP/S/XI/2024;2024;12 November 2024 s.d 11 Agustus 2025;https://drive.google.com/file/d/1d78BCEKbgG0E5WWADikrCLtKivuDw-uS/view?usp=sharing
+17;Sarjana;Antropologi;Baik Sekali;255/SK/BAN-PT/Ak.KP/S/II/2025;2025;11 Februari 2025 s.d 24 Mei 2027;https://drive.google.com/file/d/1dxF78AKv_1Vijfn2FooYTyS6ng7C4GiB/view?usp=sharing
+18;Sarjana;Ilmu Komunikasi;Baik Sekali;11559/SK/BAN-PT/AK-ISK/S/X/2021;2021;12 Oktober 2021 s.d 17 November 2025;https://drive.google.com/file/d/1iNWUi1aLAVRAWtI1VKebKuW1Tvj8ZKT8/view?usp=sharing
+19;Sarjana;Sosiologi;Unggul;6471/SK/BAN-PT/Ak/S/X/2024;2024;22 Oktober 2024 s.d 22 Oktober 2029;https://drive.google.com/file/d/1v1kwMHPGIbhy54So7TTmt7X4b3-cVHWV/view?usp=sharing
+20;Sarjana;Administrasi Bisnis;Baik Sekali;612/DE/A.5/AR.10/VIII/2023;2023;16 Agustus 2023 s.d 16 Agustus 2028;https://drive.google.com/file/d/1Xft2x7Aizf3l1nz3rYSH4KPCimREsD5e/view?usp=sharing
+21;Magister;Administrasi Publik;Unggul;5083/SK/BAN-PT/Ak/M/VII/2024;2024;23 Juli 2024 s.d 23 Juli 2029;https://drive.google.com/file/d/1XG_GEld6T627IxPZ3TZ8ZWzCOlukuKxy/view?usp=sharing
+22;Magister;Sosiologi;Unggul;5497/SK/BAN-PT/Ak/M/VIII/2024;2024;19 Agustus 2024 s.d 19 Agustus 2029;https://drive.google.com/file/d/1P0N4jMfU8uBsM83etKbZz1a-L8BlWUK3/view?usp=sharing
+23;Magister;Ilmu Komunikasi;Minimum;Prodi Baru;2025;;
+24;Sarjana;Ilmu Kelautan;Baik;11856/SK/BAN-PT/Akred/S/X/2021;2021;26 Oktober 2021 s.d 26 Oktober 2026;https://drive.google.com/file/d/1wDXHXGnShKikQpFS4zLOMWw71OakygR8/view?usp=sharing
+25;Sarjana;Agroekoteknologi;Unggul;7296/SK/BAN-PT/Ak/S/VIII/2025;2025;13 Agustus 2025 s.d 13 Agustus 2030;https://drive.google.com/file/d/1eX5Jt7NRT2M_pFlomEHJNl8oSJSw-qNV/view?usp=sharing
+26;Sarjana;Akuakultur;Baik Sekali;7264/SK/BAN-PT/Ak/S/VIII/2025;2025;13 Agustus 2025 s.d 13 Agustus 2030;https://drive.google.com/file/d/10VFP1zRihu-y_CizLs0HY0BiXiH-3EKK/view?usp=sharing
+27;Sarjana;Agribisnis;Unggul;;28 Oktober 2025;;
+28;Magister;Agroekoteknologi;Baik Sekali;1983/SK/BAN-PT/Ak/M/V/2023;2023;24 Mei 2023 s.d 24 Mei 2028;https://drive.google.com/file/d/1_sKiZFldbXPzpoppCO_9Do0koMQz3OYv/view?usp=sharing
+29;Magister;Agribisnis;Baik Sekali;7427/SK/BAN-PT/Ak/M/IX/2025;02 September 2025;02 September 2025 s.d 02 September 2030;https://drive.google.com/file/d/1jayMEkJGJn1Uh-0F0bFCZoXlXmUbPfWO/view?usp=sharing
+30;Sarjana;Manajemen;Unggul;1584/DE/A.5/AR.10/IX/2024;2024;22 Oktober 2024 s.d 22 Oktober 2029;https://drive.google.com/file/d/1Bavr5X0OF4mb_SoVYgsMTcCd_ZNp6sfa/view?usp=sharing
+31;Sarjana;Akuntansi;Unggul;852/DE/A.5/AR.10/XI/2023;2023;01 November 2023 s.d 01 November 2028;https://drive.google.com/file/d/1BfPuhZfdZyzsPJYNmbDtBs9L2Y6OE9ZL/view?usp=sharing
+32;Sarjana;Ekonomi Pembangunan;Baik Sekali;801/DE/A.5/AR.10/X/2023;2023;13 Oktober 2023 s.d 13 Oktober 2028;https://drive.google.com/file/d/1jrVKSUvY9xBcLZTd2YF5hhAahX45WUPp/view?usp=sharing
+33;Sarjana;Ekonomi Syariah;Unggul;2902/DE/A.5/AR.10/IX/2025;29 September 2025;;
+34;Sarjana;Kewirausahaan;Baik Sekali;909/DE/A.5/AR.10/XII/2023;2023;08 Desember 2023 s.d 08 Desember 2028;https://drive.google.com/file/d/1qfzlxGWqQzL61ZC5yGmHXMGvkzUJMK-X/view?usp=sharing
+35;Magister;Ilmu Manajemen;Baik Sekali;796/DE/A.5/AR.10/X/2023;2023;13 Oktober 2023 s.d 13 Okt 2028;https://drive.google.com/file/d/1X67Wm2iSftccJ0UGR29QQhZ813VxpFe9/view?usp=sharing
+36;Magister;Ekonomi Pembangunan;Baik Sekali;513/DE/A.5/AR.10/VII/2023;2023;5 Juli 2023 s.d 5 Juli 2028;https://drive.google.com/file/d/10WKZwiZCLkQfnfMoKEQDBT-JIFdNltAw/view?usp=sharing
+37;Magister;Ilmu Akuntasi;Baik Sekali;1383/DE/A.5/AR.10/VII/2024;2024;19 Juli 2024 s.d 19 Juli 2029;https://drive.google.com/file/d/1qlJPvsmEpOs_bebfA9kOrR0fMh0wxvli/view?usp=sharing
+38;Sarjana;Hukum;Unggul;5149/SK/BAN-PT/SURV-BDG/S/VIII/2022;2022;28 Desember 2021 s.d 28 Desember 2026;https://drive.google.com/file/d/1z27HypJbehNfEKjM0is0RornAvrd4j8F/view?usp=sharing
+39;Magister;Hukum;Unggul;7531/SK/BAN-PT/Ak/M/IX/2025;09 September 2025;09 September 2025 s.d 09 September 2030;https://drive.google.com/file/d/1D2zq775cqRtwspUo8SpIGq_eAn7KFrpB/view?usp=sharing
+40;Doktor;Hukum;Minimum;Prodi Baru;2025;;
+41;Sarjana;Kedokteran;Baik Sekali;0359/LAM-PTKes/Akr/Sar/V/2023;2023;26 Mei 2023 s.d 25 Mei 2028;https://drive.google.com/file/d/1TcN4jgozrQxC1K4zpUTS7WVmtAe2ys7L/view?usp=sharing
+42;Profesi;Pendidikan Profesi Dokter;Baik Sekali;0360/LAM-PTKes/Akr/Pro/V/2023;2023;26 Mei 2023 s.d 25 Mei 2028;https://drive.google.com/file/d/16esx7qeUReIKT6AuqQJmQuCICYNOu252/view?usp=sharing
+43;Sarjana;Psikologi;B;4784/SK/BAN-PT/Akred/S/VIII/2020;2020;19 Agustus 2020 s.d 19 Agustus 2025;https://drive.google.com/file/d/1fF5_4kRnICWXbPim2Hbz35lGHmRUp0T8/view?usp=sharing
+44;D-III;Keperawatan;Baik;0669/LAM-PTKes/Akr/Dip/IX/2024;2024;13 September 2024 s.d 12 September 2029;https://drive.google.com/file/d/18yZV45PdyjO6x-FcjbguX2-9NuzhJJD0/view?usp=sharing
+45;Sarjana;Pendidikan Bahasa Indonesia;Baik Sekali;571/SK/BAN-PT/Ak.KP/S/II/2024;2024;23 Februari 2024 s.d 23 Februari 2026;https://drive.google.com/file/d/1Ydp1eoHrgxyuH94y7mBCeRkbaXCMPqzO/view?usp=sharing
+46;Sarjana;Pendidikan Fisika;B;2540/SK/BAN-PT/Akred/S/IV/2021;2021;28 April 2021 s.d 28 April 2026;https://drive.google.com/file/d/1sp05Xeg_cG1b37Kdd4WmzNEz4mj0fnt8/view?usp=sharing
+47;Sarjana;Pendidikan Matematika;Unggul;1358/SK/LAMDIK/Ak/S/VIII/2025;2025;30 Juli 2025 s.d 29 Juli 2030;https://drive.google.com/file/d/1ez3kdGFcne-_aRz768OgalpFEjiA68aN/view?usp=sharing
+48;Sarjana;Pendidikan Kimia;B;7032/SK/BAN-PT/Akred/S/XI/2020;2020;3 November 2020 s.d 3 November 2025;https://drive.google.com/file/d/1bDkGybsgexhTgjkNPegQ8VOUjd-gPZp9/view?usp=sharing
+49;Sarjana;Pendidikan Vocasional Teknik Mesin;Baik Sekali;4936/SK/BAN-PT/Ak.KP/S/XI/2023;2023;28 November 2023 s.d 25 Agustus 2025;https://drive.google.com/file/d/1Qvcz69URts5cH8GW41lPbOrwkisVr9AA/view?usp=sharing
+50;Profesi;Pendidikan Profesi Guru;Baik Sekali;1651/SK/LAMDIK/Ak/P/IX/2025;22 September 2025;22 September 2025 s.d 21 September 2030;https://drive.google.com/file/d/1vCNw0ZZHEsvUHWUIw3UbBZ4vfPoZOfWO/view?usp=sharing

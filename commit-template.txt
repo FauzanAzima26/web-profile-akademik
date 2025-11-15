@@ -1,0 +1,22 @@
+# 🎯 TEMPLATE PESAN COMMIT TIM PROFIL PRODI
+# Gunakan format:
+# <type>: <deskripsi singkat>
+#
+# 📚 Tipe perubahan yang bisa dipakai:
+# feat     : fitur baru (contoh: tambah halaman profil)
+# fix      : perbaikan bug/error
+# style    : perubahan tampilan (warna, CSS, layout)
+# docs     : dokumentasi (README, komentar)
+# refactor : ubah struktur kode tanpa ubah fungsi
+# chore    : update config, dependensi, dsb
+#
+# 📘 Contoh:
+# feat: buat halaman galeri kegiatan
+# fix: perbaiki route halaman profil
+# style: ubah warna navbar jadi biru tua
+# docs: tambahkan petunjuk instalasi di README
+# refactor: pisahkan controller dosen dan berita
+# chore: update composer dan bootstrap versi baru
+#
+# ✍️ Tulis pesan commit kamu di bawah ini (hapus tanda pagar)
+#
