@@ -61,7 +61,29 @@
                                 href="{{ route('frontend.akreditasi.index') }}">Akreditasi</a></li>
                     </ul>
                 </li>
-                <li><a href="rooms.html">Rooms</a></li>
+                <li class="dropdown">
+                    <a href="#"
+                        class="{{ request()->routeIs([
+                            'frontend.visi-misi.*',
+                            'frontend.sejarah.*',
+                            'frontend.struktur.*',
+                            'frontend.akreditasi.*',
+                        ])
+                            ? 'active'
+                            : '' }}">
+                        <span>Akademik & Kurikulum</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                    </a>
+
+                    <ul>
+                        <li><a class="{{ request()->routeIs('frontend.visi-misi.*') ? 'active' : '' }}"
+                                href="{{ route('frontend.visi-misi.index') }}">Daftar mata kuliah</a></li>
+                        <li><a class="{{ request()->routeIs('frontend.sejarah.*') ? 'active' : '' }}"
+                                href="{{ route('frontend.sejarah.index') }}">Struktur kurikulum</a></li>
+                        <li><a class="{{ request()->routeIs('frontend.struktur.*') ? 'active' : '' }}"
+                                href="{{ route('frontend.struktur.index') }}">Jadwal</a></li>
+                    </ul>
+                </li>
                 <li><a href="amenities.html">Amenities</a></li>
                 <li><a href="location.html">Location</a></li>
                 <li><a href="contact.html">Contact</a></li>
