@@ -25,11 +25,11 @@
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                     <div class="about-images">
                         <div class="main-image">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/showcase-8.webp"
+                            <img src="{{ asset('assets/frontend') }}/img/download (2).jpg"
                                 alt="Grandview Resort Main View" class="img-fluid">
                         </div>
                         <div class="secondary-image">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/room-12.webp" alt="Luxury Suite Interior"
+                            <img src="{{ asset('assets/frontend') }}/img/download (3).jpg" alt="Luxury Suite Interior"
                                 class="img-fluid">
                         </div>
                     </div>

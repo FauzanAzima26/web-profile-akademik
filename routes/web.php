@@ -1,33 +1,34 @@
 <?php
 
+use App\Models\Dosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\homeController;
 
-use App\Http\Controllers\Backend\AkademikController;
+use App\Http\Controllers\Frontend\homeController;
+use App\Http\Controllers\Frontend\DosenController;
 use App\Http\Controllers\Frontend\SejarahController;
-use App\Http\Controllers\Frontend\visiMisiController;
 use App\Http\Controllers\Frontend\StrukturController;
+use App\Http\Controllers\Frontend\visiMisiController;
 use App\Http\Controllers\Frontend\AkreditasiController;
-use App\Http\Controllers\Backend\dashboardController;
+use App\Http\Controllers\Frontend\AkademikController;
 
 Route::get('/', [homeController::class, 'index'])->name('frontend.home');
-
 Route::prefix('profil')->group(function () {
     Route::resource('visi-misi', visiMisiController::class)->names('frontend.visi-misi');
     Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
     Route::resource('struktur', StrukturController::class)->names('frontend.struktur');
     Route::resource('akreditasi', AkreditasiController::class)->names('frontend.akreditasi');
 });
+Route::resource('dosen', DosenController::class)->names('frontend.dosen');
+Route::resource('akademik', AkademikController::class)->names('frontend.akademik');
+
+
 
 Route::get('/berita', fn() => view('frontend.berita.index'));
 Route::get('/galeri', fn() => view('frontend.galeri.index'));
 Route::get('/kontak', fn() => view('frontend.kontak.index'));
 use App\Http\Controllers\Backend\PengaturanController;
-use App\Http\Controllers\Frontend\DosenController as FrontendDosenController;
-use App\Http\Controllers\Frontend\AkademikController as FrontendAkademikController;
 
-Route::get('/akademik', [FrontendAkademikController::class, 'index']);
 Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
 Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
 Route::get('/prestasi', fn() => view('frontend.prestasi.index'));
@@ -42,16 +43,6 @@ Route::get('/prestasi', fn() => view('frontend.prestasi.index'));
 Route::prefix('backend')->name('backend.')->middleware('auth')->group(function ()
 
 */
-
-Route::prefix('backend')->name('backend.')->group(function (){
-
-    // Pengaturan
-    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
-    Route::put('/pengaturan', [PengaturanController::class, 'update'])->name('pengaturan.update');
-
-    // CRUD Akademik
-    Route::resource('akademik',AkademikController::class);
-});
 
 
 Auth::routes();

@@ -10,26 +10,27 @@
 
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                     <div class="hero-content">
-                        <h1>Luxury Redefined in Every Stay</h1>
-                        <p class="lead">Experience unparalleled comfort and sophistication at our premium hotel. From
-                            elegant suites to world-class amenities, every moment of your stay is crafted to perfection.</p>
+                        <h1>Membangun Generasi Digital yang Inovatif</h1>
+                        <p class="lead">Program Studi Informatika Universitas Malikussaleh berkomitmen mencetak lulusan unggul
+                        di bidang teknologi informasi melalui pendidikan berkualitas, penelitian inovatif, dan
+                        pengabdian masyarakat berbasis teknologi digital.</p>
                         <div class="hero-features">
                             <div class="feature-item">
                                 <i class="bi bi-wifi"></i>
-                                <span>Complimentary WiFi</span>
+                                <span>Smart Learning Environment</span>
                             </div>
                             <div class="feature-item">
                                 <i class="bi bi-car-front"></i>
-                                <span>Valet Parking</span>
+                                <span>Kolaborasi Industri</span>
                             </div>
                             <div class="feature-item">
                                 <i class="bi bi-cup-hot"></i>
-                                <span>24/7 Room Service</span>
+                                <span>Komunitas Akademik Aktif</span>
                             </div>
                         </div>
                         <div class="hero-buttons">
-                            <a href="booking.html" class="btn btn-primary">Book Now</a>
-                            <a href="rooms.html" class="btn btn-outline">View Rooms</a>
+                            <a href="booking.html" class="btn btn-primary">Profil Program Studi</a>
+                            <a href="rooms.html" class="btn btn-outline">Dosen & Kurikulum</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                     <div class="hero-images">
                         <div class="main-image">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/showcase-3.webp" alt="Luxury Hotel"
+                            <img src="{{ asset('assets/frontend') }}/img/download.webp" alt="Unimal"
                                 class="img-fluid">
                         </div>
                         </div>

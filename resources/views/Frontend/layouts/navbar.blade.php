@@ -11,6 +11,7 @@
             <ul>
                 <li><a href="{{ route('frontend.home') }}"
                         class="{{ request()->routeIs('frontend.home') ? 'active' : '' }}">Home</a></li>
+
                 <li class="dropdown">
                     <a href="#"
                         class="{{ request()->routeIs([
@@ -36,56 +37,14 @@
                                 href="{{ route('frontend.akreditasi.index') }}">Akreditasi</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#"
-                        class="{{ request()->routeIs([
-                            'frontend.visi-misi.*',
-                            'frontend.sejarah.*',
-                            'frontend.struktur.*',
-                            'frontend.akreditasi.*',
-                        ])
-                            ? 'active'
-                            : '' }}">
-                        <span>Dosen dan Tendik</span>
-                        <i class="bi bi-chevron-down toggle-dropdown"></i>
-                    </a>
 
-                    <ul>
-                        <li><a class="{{ request()->routeIs('frontend.visi-misi.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.visi-misi.index') }}">Visi dan Misi</a></li>
-                        <li><a class="{{ request()->routeIs('frontend.sejarah.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.sejarah.index') }}">Sejarah</a></li>
-                        <li><a class="{{ request()->routeIs('frontend.struktur.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.struktur.index') }}">Struktur Organisasi</a></li>
-                        <li><a class="{{ request()->routeIs('frontend.akreditasi.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.akreditasi.index') }}">Akreditasi</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#"
-                        class="{{ request()->routeIs([
-                            'frontend.visi-misi.*',
-                            'frontend.sejarah.*',
-                            'frontend.struktur.*',
-                            'frontend.akreditasi.*',
-                        ])
-                            ? 'active'
-                            : '' }}">
-                        <span>Akademik & Kurikulum</span>
-                        <i class="bi bi-chevron-down toggle-dropdown"></i>
-                    </a>
+                <li><a href="{{ route('frontend.dosen.index') }}"
+                        class="{{ request()->routeIs('frontend.dosen.*') ? 'active' : '' }}">Dosen & Tendik</a></li>
 
-                    <ul>
-                        <li><a class="{{ request()->routeIs('frontend.visi-misi.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.visi-misi.index') }}">Daftar mata kuliah</a></li>
-                        <li><a class="{{ request()->routeIs('frontend.sejarah.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.sejarah.index') }}">Struktur kurikulum</a></li>
-                        <li><a class="{{ request()->routeIs('frontend.struktur.*') ? 'active' : '' }}"
-                                href="{{ route('frontend.struktur.index') }}">Jadwal</a></li>
-                    </ul>
-                </li>
-                <li><a href="amenities.html">Amenities</a></li>
-                <li><a href="location.html">Location</a></li>
+                <li><a href="{{ route('frontend.akademik.index') }}"
+                        class="{{ request()->routeIs('frontend.akademik.*') ? 'active' : '' }}">Akademik &
+                        Kurikulum</a></li>
+
                 <li><a href="contact.html">Contact</a></li>
 
                 <li class="dropdown">

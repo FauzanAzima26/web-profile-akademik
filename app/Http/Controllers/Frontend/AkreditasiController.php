@@ -23,11 +23,52 @@ class AkreditasiController extends Controller
 
         $rows = [];
         if (($file = fopen($filePath, 'r')) !== false) {
-            while (($data = fgetcsv($file, 1000, ';')) !== false) { // ← delimiter pakai ;
+
+            while (($data = fgetcsv($file, 2000, ';')) !== false) {
+
+                // Skip baris kosong
+                if (count(array_filter($data)) === 0) {
+                    continue;
+                }
+
                 $rows[] = $data;
             }
+
             fclose($file);
         }
+
+        // ============================
+        // 1) Buang header kosong
+        // ============================
+        $rows = array_filter($rows, function ($row) {
+            return count(array_filter($row)) > 0;
+        });
+
+        $rows = array_values($rows);
+
+        // ============================
+        // 2) Ambil header asli
+        // ============================
+        $header = $rows[0];
+
+        // ============================
+        // 3) Buang header duplikat (baris yang sama persis dg header)
+        // ============================
+        $cleaned = [];
+        foreach ($rows as $i => $row) {
+            if ($i === 0) { // header asli jangan dibuang
+                $cleaned[] = $row;
+                continue;
+            }
+
+            if ($row === $header) { // header ganda
+                continue;
+            }
+
+            $cleaned[] = $row;
+        }
+
+        $rows = array_values($cleaned);
 
         return view('Frontend.Profil.akreditasi', compact('rows'));
     }

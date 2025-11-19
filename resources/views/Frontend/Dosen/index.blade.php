@@ -1,48 +1,90 @@
-@extends('layouts.main')
+@extends('Frontend.layouts.main')
 
-@section('title', 'Dosen')
+@section('title', 'Struktur Organisasi')
 
 @section('content')
-<div class="container py-4">
-    <h2 class="fw-bold mb-4">Dosen Pengajar</h2>
-    <p class="text-muted mb-4">Daftar dosen pengajar Program Studi Teknik Informatika.</p>
+    <!-- Struktur Organisasi Section -->
+    <section id="about" class="about section">
 
-    @if($dosens->count() > 0)
-        <div class="row">
-            @foreach($dosens as $dosen)
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            @if ($dosen->foto)
-                                <img src="{{ Storage::url($dosen->foto) }}" alt="Foto {{ $dosen->nama }}" class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;">
-                            @else
-                                <i class="bi bi-person-circle text-muted mb-3" style="font-size: 5rem;"></i>
-                            @endif
-                            <h5 class="card-title">{{ $dosen->nama }}</h5>
-                            <p class="card-text text-muted">{{ $dosen->jabatan ?? 'Dosen' }}</p>
-                            @if($dosen->bidang_keahlian)
-                                <p class="card-text"><small class="text-muted">{{ $dosen->bidang_keahlian }}</small></p>
-                            @endif
-                            @if($dosen->email)
-                                <p class="card-text"><i class="bi bi-envelope"></i> {{ $dosen->email }}</p>
-                            @endif
-                            @if($dosen->telepon)
-                                <p class="card-text"><i class="bi bi-telephone"></i> {{ $dosen->telepon }}</p>
-                            @endif
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row features-showcase">
+                <div class="col-12">
+                    <div class="features-header text-center" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Tenaga Kependidikan</h3>
+                        <p>Discover the amenities and services that make your stay unforgettable</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Contoh 1 -->
+                <div class="col-lg-3 col-md-5">
+                    <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
+                        <div class="feature-visual text-center p-3">
+                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
+                                class="img-fluid rounded-circle" width="120">
                         </div>
-                        <div class="card-footer text-muted">
-                            <small>Dibuat: {{ $dosen->created_at->format('d/m/Y') }}</small>
+                        <div class="feature-details text-center">
+                            <h4>Nama Dosen</h4>
+                            <p><strong>Bidang Keahlian:</strong> Teknik Sipil, Manajemen Konstruksi</p>
+                            <p><strong>Jabatan Akademik:</strong> Lektor Kepala</p>
+                            <p><strong>Kontak:</strong> email@example.com</p>
                         </div>
                     </div>
                 </div>
-            @endforeach
+
+                <!-- Contoh 2 -->
+                <div class="col-lg-3 col-md-5">
+                    <div class="feature-card" data-aos="flip-up" data-aos-delay="250">
+                        <div class="feature-visual text-center p-3">
+                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
+                                class="img-fluid rounded-circle" width="120">
+                        </div>
+                        <div class="feature-details text-center">
+                            <h4>Nama Dosen</h4>
+                            <p><strong>Bidang Keahlian:</strong> Teknik Mesin, Material</p>
+                            <p><strong>Jabatan Akademik:</strong> Asisten Ahli</p>
+                            <p><strong>Kontak:</strong> dosen@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 3 -->
+                <div class="col-lg-3 col-md-5">
+                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
+                        <div class="feature-visual text-center p-3">
+                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
+                                class="img-fluid rounded-circle" width="120">
+                        </div>
+                        <div class="feature-details text-center">
+                            <h4>Nama Dosen</h4>
+                            <p><strong>Bidang Keahlian:</strong> Industri, Supply Chain</p>
+                            <p><strong>Jabatan Akademik:</strong> Lektor</p>
+                            <p><strong>Kontak:</strong> nama@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 4 -->
+                <div class="col-lg-3 col-md-5">
+                    <div class="feature-card" data-aos="flip-up" data-aos-delay="350">
+                        <div class="feature-visual text-center p-3">
+                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
+                                class="img-fluid rounded-circle" width="120">
+                        </div>
+                        <div class="feature-details text-center">
+                            <h4>Nama Dosen</h4>
+                            <p><strong>Bidang Keahlian:</strong> Kimia, Proses Industri</p>
+                            <p><strong>Jabatan Akademik:</strong> Guru Besar</p>
+                            <p><strong>Kontak:</strong> contact@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-    @else
-        <div class="text-center py-5">
-            <i class="bi bi-info-circle text-muted" style="font-size: 3rem;"></i>
-            <h5 class="text-muted mt-3">Belum ada data dosen</h5>
-            <p class="text-muted">Data dosen akan segera ditambahkan.</p>
-        </div>
-    @endif
-</div>
+
+    </section><!-- /Struktur Organisasi Section -->
 @endsection

@@ -17,147 +17,69 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Spa Services"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-flower1"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Rejuvenating treatments in our award-winning wellness sanctuary</p>
-                        </div>
+            <div class="organization-structure">
+
+                <!-- Pimpinan Utama -->
+                <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                        width="150">
+                    <h4>KETUA</h4>
+                    <p>Nama Ketua</p>
+                </div>
+
+                <!-- Wakil Ketua -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up" data-aos-delay="250">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="130">
+                        <h5>WAKIL KETUA</h5>
+                        <p>Nama Wakil Ketua</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="250">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Fine Dining"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-cup-hot"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Michelin-starred cuisine crafted by renowned executive chefs</p>
-                        </div>
+
+                <!-- Kepala Bagian -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="300">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="120">
+                        <h6>Kepala Bagian Akademik</h6>
+                        <p>Nama</p>
+                    </div>
+                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="350">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="120">
+                        <h6>Kepala Bagian Umum</h6>
+                        <p>Nama</p>
+                    </div>
+                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="400">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="120">
+                        <h6>Kepala Bagian Keuangan</h6>
+                        <p>Nama</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Prime Location"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Nestled in the heart of the city with breathtaking panoramic views</p>
-                        </div>
+
+                <!-- Staf -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="450">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="100">
+                        <p>Staf 1</p>
+                    </div>
+                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="500">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="100">
+                        <p>Staf 2</p>
+                    </div>
+                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="550">
+                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
+                            width="100">
+                        <p>Staf 3</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Prime Location"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Nestled in the heart of the city with breathtaking panoramic views</p>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
-            <div class="row">
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Spa Services"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-flower1"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Rejuvenating treatments in our award-winning wellness sanctuary</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="250">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Fine Dining"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-cup-hot"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Michelin-starred cuisine crafted by renowned executive chefs</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Prime Location"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Nestled in the heart of the city with breathtaking panoramic views</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
-                        <div class="feature-visual">
-                            <img src="{{ asset('assets/frontend') }}/img/hotel/bahlil.jpg" alt="Prime Location"
-                                class="img-fluid">
-                            <div class="feature-overlay">
-                                <div class="feature-icon">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature-details">
-                            <h4>Bahlil</h4>
-                            <p>Nestled in the heart of the city with breathtaking panoramic views</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
