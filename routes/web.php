@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\homeController;
 use App\Http\Controllers\Frontend\DosenController;
 use App\Http\Controllers\Frontend\SejarahController;
+use App\Http\Controllers\Backend\dashboardController;
+use App\Http\Controllers\Frontend\AkademikController;
 use App\Http\Controllers\Frontend\StrukturController;
 use App\Http\Controllers\Frontend\visiMisiController;
 use App\Http\Controllers\Frontend\AkreditasiController;
-use App\Http\Controllers\Frontend\AkademikController;
 
 Route::get('/', [homeController::class, 'index'])->name('frontend.home');
 Route::prefix('profil')->group(function () {
@@ -22,12 +23,15 @@ Route::prefix('profil')->group(function () {
 Route::resource('dosen', DosenController::class)->names('frontend.dosen');
 Route::resource('akademik', AkademikController::class)->names('frontend.akademik');
 
+Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
+
 
 
 Route::get('/berita', fn() => view('frontend.berita.index'));
 Route::get('/galeri', fn() => view('frontend.galeri.index'));
 Route::get('/kontak', fn() => view('frontend.kontak.index'));
 use App\Http\Controllers\Backend\PengaturanController;
+
 
 Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
 Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
