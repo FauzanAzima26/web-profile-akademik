@@ -2,6 +2,28 @@
 
 @section('title', 'Kurikulum & Jadwal')
 
+@push('styles')
+    <style>
+        /* Warna tab normal */
+        .nav-pills .nav-link {
+            color: #436e62;
+            border: 1px solid #436e62;
+        }
+
+        /* Warna saat tab aktif */
+        .nav-pills .nav-link.active {
+            background-color: #436e62;
+            color: white;
+        }
+
+        /* Hover efek (opsional) */
+        .nav-pills .nav-link:hover {
+            background-color: #436e62;
+            color: white;
+        }
+    </style>
+@endpush
+
 @section('content')
     <section id="kurikulum" class="section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">

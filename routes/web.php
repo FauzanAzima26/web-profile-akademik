@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\Dosen;
+use App\Models\contact;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\homeController;
 use App\Http\Controllers\Frontend\DosenController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
 use App\Http\Controllers\Backend\dashboardController;
 use App\Http\Controllers\Frontend\AkademikController;
@@ -22,6 +24,7 @@ Route::prefix('profil')->group(function () {
 });
 Route::resource('dosen', DosenController::class)->names('frontend.dosen');
 Route::resource('akademik', AkademikController::class)->names('frontend.akademik');
+Route::resource('contact', ContactController::class)->names('frontend.contact');
 
 Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
 
@@ -29,7 +32,6 @@ Route::resource('dashboard', dashboardController::class)->names('backend.dashboa
 
 Route::get('/berita', fn() => view('frontend.berita.index'));
 Route::get('/galeri', fn() => view('frontend.galeri.index'));
-Route::get('/kontak', fn() => view('frontend.kontak.index'));
 use App\Http\Controllers\Backend\PengaturanController;
 
 
