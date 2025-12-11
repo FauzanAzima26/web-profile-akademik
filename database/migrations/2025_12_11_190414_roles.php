@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beritas', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->json('permissions')->nullable();
             $table->timestamps();
-            $table->string('judul');
-            $table->text('isi');
-            $table->string('gambar')->nullable();
-            $table->string('penulis')->nullable();
-            $table->date('tanggal')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('beritas');
+        //
     }
 };

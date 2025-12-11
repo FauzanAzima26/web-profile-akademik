@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dosens', function (Blueprint $table) {
+        Schema::create('struktur_organisasi', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('jabatan');
             $table->string('nama');
-            $table->string('nidn')->nullable();
-            $table->string('jabatan')->nullable();
             $table->string('foto')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->softDeletes();
-
+            $table->integer('urutan')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dosens');
+        //
     }
 };

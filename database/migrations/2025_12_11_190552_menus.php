@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galeris', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_id')->nullable()->constrained('menus')->cascadeOnDelete();
+            $table->string('title');
+            $table->string('url')->nullable();
+            $table->string('icon')->nullable();
+            $table->integer('order')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->string('judul');
-            $table->text('deskripsi')->nullable();
-            $table->string('gambar')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->softDeletes();
         });
-    
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galeris');
+        //
     }
 };

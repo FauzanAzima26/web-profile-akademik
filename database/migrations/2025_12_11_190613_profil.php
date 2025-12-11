@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('profil', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_prodi');
+            $table->string('akreditasi');
+            $table->integer('tahun_berdiri');
+            $table->text('visi');
+            $table->longText('misi');
+            $table->longText('tujuan')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menus');
+        //
     }
 };

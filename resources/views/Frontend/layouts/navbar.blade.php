@@ -63,6 +63,29 @@
                     </a>
                 </li>
 
+                <!-- DROPDOWN KEGIATAN -->
+                <li class="dropdown">
+                    <a href="#"
+                        class="{{ request()->routeIs(['frontend.penelitian.*', 'frontend.prestasi.*']) ? 'active' : '' }}">
+                        <span>Kegiatan</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                    </a>
+
+                    <ul>
+                        <li><a href="{{ route('frontend.penelitian.index') }}"
+                                class="{{ request()->routeIs('frontend.penelitian.*') ? 'active' : '' }}">
+                                Penelitian & Pengabdian
+                            </a>
+                        </li>
+
+                        <li><a href="{{ route('frontend.prestasi.index') }}"
+                                class="{{ request()->routeIs('frontend.prestasi.*') ? 'active' : '' }}">
+                                Prestasi Mahasiswa
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- DROPDOWN INFORMASI -->
                 <li class="dropdown">
                     <a href="#"
@@ -82,29 +105,6 @@
                             <a href="{{ route('frontend.contact.index') }}"
                                 class="{{ request()->routeIs('frontend.contact.*') ? 'active' : '' }}">
                                 Contact
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- DROPDOWN KEGIATAN -->
-                <li class="dropdown">
-                    <a href="#"
-                        class="{{ request()->routeIs(['frontend.penelitian.*', 'frontend.prestasi.*']) ? 'active' : '' }}">
-                        <span>Kegiatan</span>
-                        <i class="bi bi-chevron-down toggle-dropdown"></i>
-                    </a>
-
-                    <ul>
-                        <li><a href="{{ route('frontend.penelitian.index') }}"
-                                class="{{ request()->routeIs('frontend.penelitian.*') ? 'active' : '' }}">
-                                Penelitian & Pengabdian
-                            </a>
-                        </li>
-
-                        <li><a href="{{ route('frontend.prestasi.index') }}"
-                                class="{{ request()->routeIs('frontend.prestasi.*') ? 'active' : '' }}">
-                                Prestasi Mahasiswa
                             </a>
                         </li>
                     </ul>
