@@ -5,15 +5,19 @@ use App\Models\contact;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\AkreditasiController;
 use App\Http\Controllers\Frontend\homeController;
 use App\Http\Controllers\Frontend\DosenController;
+use App\Http\Controllers\Frontend\BeritaController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
 use App\Http\Controllers\Backend\dashboardController;
 use App\Http\Controllers\Frontend\AkademikController;
+use App\Http\Controllers\Frontend\PrestasiController;
 use App\Http\Controllers\Frontend\StrukturController;
 use App\Http\Controllers\Frontend\visiMisiController;
-use App\Http\Controllers\Frontend\AkreditasiController;
+use App\Http\Controllers\Frontend\PenelitianController;
+use App\Http\Controllers\Frontend\GaleriController;
 
 Route::get('/', [homeController::class, 'index'])->name('frontend.home');
 Route::prefix('profil')->group(function () {
@@ -25,19 +29,17 @@ Route::prefix('profil')->group(function () {
 Route::resource('dosen', DosenController::class)->names('frontend.dosen');
 Route::resource('akademik', AkademikController::class)->names('frontend.akademik');
 Route::resource('contact', ContactController::class)->names('frontend.contact');
+Route::resource('penelitian', PenelitianController::class)->names('frontend.penelitian');
+Route::resource('prestasi', PrestasiController::class)->names('frontend.prestasi');
+Route::resource('berita', BeritaController::class)->names('frontend.berita');
+Route::resource('galery', GaleriController::class)->names('frontend.galery');
+
 
 Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
 
 
 
-Route::get('/berita', fn() => view('frontend.berita.index'));
-Route::get('/galeri', fn() => view('frontend.galeri.index'));
-use App\Http\Controllers\Backend\PengaturanController;
 
-
-Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
-Route::get('/penelitian', fn() => view('frontend.penelitian.index'));
-Route::get('/prestasi', fn() => view('frontend.prestasi.index'));
 
 /*
 
