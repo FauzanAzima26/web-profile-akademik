@@ -65,16 +65,15 @@
         </li>
 
         <!-- management konten -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Managemen konten</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="{{ route('backend.berita.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Berita</div>
                     </a>
                 </li>
@@ -97,16 +96,15 @@
         </li>
 
         <!-- management akademik -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Managemen akademik</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
                         <div data-i18n="Without menu">Data dosen</div>
                     </a>
                 </li>
@@ -134,16 +132,15 @@
         </li>
 
         <!-- penelitian & pengabdian -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
                         <div data-i18n="Without menu">Data penelitian</div>
                     </a>
                 </li>
@@ -161,16 +158,15 @@
         </li>
 
         <!-- prestasi dan galeri -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Prestasi & Galeri</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
                         <div data-i18n="Without menu">Prestasi Mahasiswa</div>
                     </a>
                 </li>
@@ -183,16 +179,15 @@
         </li>
 
         <!-- Menu -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Menu & Navigasi</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
                         <div data-i18n="Without menu">Menu dinamis</div>
                     </a>
                 </li>
@@ -210,16 +205,15 @@
         </li>
 
         <!-- Manajemen user -->
-        <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'open' : '' }}">
-            <a href=""
-                class="menu-link menu-toggle">
+        <li class="menu-item">
+            <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Manajemen Pengguna</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->routeis('backend.visi-misi.*') ? 'active' : '' }}">
-                    <a href="{{ route('backend.visi-misi.index') }}" class="menu-link">
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
                         <div data-i18n="Without menu">Menu dinamis</div>
                     </a>
                 </li>
@@ -231,85 +225,6 @@
                 <li class="menu-item">
                     <a href="layouts-without-navbar.html" class="menu-link">
                         <div data-i18n="Without navbar">Submenu</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- manajemen akademik -->
-        <li class="menu-item active">
-            <a href="index.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Analytics">Dosen & Tendik</div>
-            </a>
-        </li>
-
-        <!-- Akademik -->
-        <li class="menu-item active">
-            <a href="index.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book-alt"></i>
-                <div data-i18n="Analytics">Akademik & Kurikulum</div>
-            </a>
-        </li>
-
-        <!-- kegiatan -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-notepad"></i>
-                <div data-i18n="Layouts">Kegiatan</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Penelitian & Pengabdian</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Prestasi Mahasiswa</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- informasi -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-info-circle"></i>
-                <div data-i18n="Layouts">Informasi</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Berita & Agenda</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Kontak</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- galery -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-images"></i>
-                <div data-i18n="Layouts">Galery</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Foto</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Video</div>
                     </a>
                 </li>
             </ul>
