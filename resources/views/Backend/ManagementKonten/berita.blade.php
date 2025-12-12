@@ -2,9 +2,16 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="fw-bold mb-3">Manajemen Berita</h4>
+        <h4 class="fw-bold mt-5 mb-3">Manajemen Berita</h4>
 
-        <table class="table table-bordered table-striped" id="beritaTable">
+        <button class="btn btn-primary mb-3" id="btnAdd" data-store="{{ route('backend.berita.store') }}">
+            + Tambah Berita
+        </button>
+        <button class="btn btn-primary mb-3" id="btnAddKategori">
+            + Tambah Kategori
+        </button>
+
+        <table class="table table-bordered table-striped" id="beritaTable" data-url="{{ route('backend.berita.data') }}">
             <thead>
                 <tr>
                     <th>No</th>
@@ -19,59 +26,14 @@
             </thead>
         </table>
     </div>
-@endsection
 
-@push('scripts')
-    <script>
-        $(function() {
-            $('#beritaTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('backend.berita.data') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'judul',
-                        name: 'judul'
-                    },
-                    {
-                        data: 'kategori',
-                        name: 'kategori.nama',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'gambar',
-                        name: 'gambar',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'penulis',
-                        name: 'penulis'
-                    },
-                    {
-                        data: 'views',
-                        name: 'views'
-                    },
-                    {
-                        data: 'status',
-                        name: 'is_published',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            });
-        });
-    </script>
-@endpush
+    @include('Backend.ManagementKonten.modal.ModalBerita')
+
+    @include('Backend.ManagementKonten.modal.KategoriBerita')
+
+    @include('Backend.ManagementKonten.modal.detailBerita')
+
+    @push('scripts')
+        <script src="{{ asset('assets/backend/js/berita.js') }}"></script>
+    @endpush
+@endsection

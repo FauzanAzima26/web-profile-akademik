@@ -65,14 +65,14 @@
         </li>
 
         <!-- management konten -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('backend.berita.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Managemen konten</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ request()->routeIs('backend.berita.*') ? 'active' : '' }}">
                     <a href="{{ route('backend.berita.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Berita</div>
                     </a>

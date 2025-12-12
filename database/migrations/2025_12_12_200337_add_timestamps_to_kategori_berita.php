@@ -11,10 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori_berita', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('warna')->nullable();
+        Schema::table('kategori_berita', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('kategori_berita', function (Blueprint $table) {
+            //
+        });
     }
 };

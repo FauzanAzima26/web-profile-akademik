@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
 use App\Http\Controllers\Backend\dashboardController;
+use App\Http\Controllers\Backend\KategoriBeritaController;
 use App\Http\Controllers\Frontend\AkademikController;
 use App\Http\Controllers\Frontend\PrestasiController;
 use App\Http\Controllers\Frontend\StrukturController;
@@ -40,6 +41,9 @@ Route::resource('dashboard', dashboardController::class)->names('backend.dashboa
 Route::prefix('management-konten')->group(function () {
     Route::resource('berita', backendBerita::class)->names('backend.berita');
     Route::get('data/berita', [backendBerita::class, 'getData'])->name('backend.berita.data');
+    Route::resource('kategori-berita', KategoriBeritaController::class)->names('backend.kategori-berita');
+    Route::get('data/kategori-berita', [KategoriBeritaController::class, 'data'])->name('backend.kategori-berita.data');
+
     Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
     Route::resource('struktur', StrukturController::class)->names('frontend.struktur');
     Route::resource('akreditasi', AkreditasiController::class)->names('frontend.akreditasi');
