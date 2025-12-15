@@ -77,8 +77,8 @@
                         <div data-i18n="Without menu">Berita</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('backend.agenda.*' ? 'active' : '') }}">
+                    <a href="{{ route('backend.agenda.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Agenda</div>
                     </a>
                 </li>
