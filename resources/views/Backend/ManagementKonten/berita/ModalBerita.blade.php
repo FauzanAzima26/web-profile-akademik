@@ -20,10 +20,7 @@
                     <div class="mb-3">
                         <label>Kategori</label>
                         <select name="kategori_id" id="kategori" class="form-control">
-                            <option value="" selected disabled>Pilih Kategori</option>
-                            @foreach ($kategori as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                            @endforeach
+                            <option value="">Pilih Kategori</option>
                         </select>
                     </div>
 

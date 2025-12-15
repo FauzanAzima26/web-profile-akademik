@@ -27,11 +27,11 @@
         </table>
     </div>
 
-    @include('Backend.ManagementKonten.modal.ModalBerita')
+    @include('Backend.ManagementKonten.berita.ModalBerita')
 
-    @include('Backend.ManagementKonten.modal.KategoriBerita')
+    @include('Backend.ManagementKonten.berita.KategoriBerita')
 
-    @include('Backend.ManagementKonten.modal.detailBerita')
+    @include('Backend.ManagementKonten.berita.detailBerita')
 
     @push('scripts')
         <script src="{{ asset('assets/backend/js/berita.js') }}"></script>

@@ -40,8 +40,9 @@ Route::resource('galery', GaleriController::class)->names('frontend.galery');
 
 Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
 Route::prefix('management-konten')->group(function () {
-    Route::resource('berita', backendBerita::class)->names('backend.berita');
     Route::get('data/berita', [backendBerita::class, 'getData'])->name('backend.berita.data');
+    Route::get('/kategori-berita/list', [backendBerita::class, 'list']);
+    Route::resource('berita', backendBerita::class)->names('backend.berita');
 
     Route::get('data/agenda', [backendAgenda::class, 'getData'])->name('backend.agenda.data');
     Route::get('agenda/sampah', [backendAgenda::class, 'sampah'])->name('agenda.sampah');

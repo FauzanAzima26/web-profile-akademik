@@ -48,9 +48,11 @@ $(function () {
     // ===== OPEN MODAL ADD =====
     $("#btnAdd").on("click", function () {
         $("#formCreate")[0].reset();
-        $("#beritaId").val(""); // hapus id, supaya dianggap tambah
+        $("#beritaId").val("");
         $("#modalTitle").text("Tambah Berita");
-        $("#previewGambar").html(""); // hapus preview gambar
+
+        loadKategori(); // 🔥 PENTING
+
         $("#modalCreate").modal("show");
     });
 
@@ -108,7 +110,8 @@ $(function () {
             success: function (res) {
                 if (res.status) {
                     // reload DataTables
-                    kategoriTable.ajax.reload();
+                    kategoriTable.ajax.reload(null, false);
+                    loadKategori();
 
                     // reset form manual
                     $("#formKategori")[0].reset(); // reset input biasa
@@ -193,7 +196,12 @@ $(function () {
             success: function (res) {
                 if (res.status) {
                     kategoriTable.ajax.reload(null, false);
-                    alert(res.message);
+                    beritaTable.ajax.reload(null, false);
+
+                    // 🔥 INI YANG KAMU BUTUHKAN
+                    reloadKategori();
+
+                    Swal.fire("Berhasil", res.message, "success");
                 }
             },
             error: function (xhr) {
@@ -246,30 +254,16 @@ $(function () {
     // --- OPEN MODAL EDIT ---
     $(document).on("click", ".editBerita", function () {
         let id = $(this).data("id");
+
         $.get("/management-konten/berita/" + id, function (res) {
             let data = res.data;
 
-            $("#beritaId").val(id);
             $("#judul").val(data.judul);
-            $("#kategori").val(data.kategori_id).change();
             $("#konten").val(data.konten);
             $("#penulis").val(data.penulis);
 
-            if (data.gambar) {
-                if ($("#previewGambar img").length === 0) {
-                    $("#previewGambar").html(
-                        '<img src="' +
-                            data.gambar +
-                            '" class="img-fluid" style="max-height:200px;">'
-                    );
-                } else {
-                    $("#previewGambar img").attr("src", data.gambar);
-                }
-            } else {
-                $("#previewGambar").html("Tidak ada gambar");
-            }
+            loadKategori(data.kategori_id); // 🔥 SELECT OTOMATIS
 
-            $("#modalTitle").text("Edit Berita");
             $("#modalCreate").modal("show");
         });
     });
@@ -344,4 +338,25 @@ $(function () {
             }
         });
     });
+
+    function loadKategori(selected = null) {
+        $.ajax({
+            url: "/management-konten/kategori-berita/list",
+            type: "GET",
+            success: function (res) {
+                let option = '<option value="">Pilih Kategori</option>';
+
+                res.data.forEach((item) => {
+                    option += `
+                    <option value="${item.id}"
+                        ${selected == item.id ? "selected" : ""}>
+                        ${item.nama}
+                    </option>
+                `;
+                });
+
+                $("#kategori").html(option);
+            },
+        });
+    }
 });

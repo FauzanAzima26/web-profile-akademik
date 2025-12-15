@@ -33,11 +33,11 @@
     </div>
 
     {{-- Modal Tambah & Edit Agenda --}}
-    @include('Backend.ManagementKonten.modal.ModalAgenda')
+    @include('Backend.ManagementKonten.agenda.ModalAgenda')
 
-    @include('Backend.ManagementKonten.modal.detailAgenda')
+    @include('Backend.ManagementKonten.agenda.detailAgenda')
 
-    @include('Backend.ManagementKonten.modal.AgendaBaruDihapus')
+    @include('Backend.ManagementKonten.agenda.AgendaBaruDihapus')
 @endsection
 
 @push('scripts')

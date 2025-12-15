@@ -13,7 +13,7 @@ class AgendaController extends Controller
 {
     public function index()
     {
-        return view('Backend.ManagementKonten.agenda');
+        return view('Backend.ManagementKonten.agenda.index');
     }
 
     public function getData()

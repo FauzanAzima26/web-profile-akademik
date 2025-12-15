@@ -17,7 +17,7 @@ class BeritaController extends Controller
     public function index()
     {
         $kategori = KategoriBerita::all();
-        return view('Backend.ManagementKonten.berita', compact('kategori'));
+        return view('Backend.ManagementKonten.berita.index', compact('kategori'));
     }
 
     public function getData()
@@ -197,6 +197,13 @@ class BeritaController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Berita berhasil dihapus'
+        ]);
+    }
+
+    public function list()
+    {
+        return response()->json([
+            'data' => KategoriBerita::select('id', 'nama')->latest()->get()
         ]);
     }
 }
