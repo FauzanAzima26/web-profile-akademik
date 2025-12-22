@@ -5,14 +5,14 @@
         <h4 class="fw-bold mt-5 mb-3">Manajemen Berita</h4>
 
         <div class="d-flex flex-wrap gap-2 mb-3">
-            <button type="button" class="btn btn-success btn-sm d-flex align-items-center" id="btnAdd" data-store={{ route('backend.berita.store') }}>
+            <button type="button" class="btn btn-success btn-sm d-flex align-items-center" id="btnAdd" data-store="{{ route('backend.berita.store') }}>
                 <i class="ti ti-plus me-1"></i> Tambah Data
             </button>
 
             <button type="button" class="btn btn-warning btn-sm d-flex align-items-center" id="btnAddKategori">
                 <i class="ti ti-trash me-1"></i> Tambah Kategori
             </button>
-            <button type="button" class="btn btn-danger btn-sm d-flex align-items-center" id="btnSampahBerita">
+            <button type="button" class="btn btn-danger btn-sm d-flex align-items-center" id="btnSampahProfilProdi">
                 <i class="ti ti-trash me-1"></i> Baru Saja Dihapus
             </button>
         </div>
@@ -38,8 +38,6 @@
     @include('Backend.ManagementKonten.berita.KategoriBerita')
 
     @include('Backend.ManagementKonten.berita.detailBerita')
-
-    @include('Backend.ManagementKonten.berita.BeritaBaruDihapus')
 
     @push('scripts')
         <script src="{{ asset('assets/backend/js/berita.js') }}"></script>

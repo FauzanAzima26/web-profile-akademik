@@ -28,9 +28,11 @@ class BeritaController extends Controller
             ->addIndexColumn()
 
             ->addColumn('kategori', function ($row) {
-                return '<span class="badge" style="background:' . ($row->kategori->warna ?? '#999') . '">'
+                return optional($row->kategori)->nama
+                    ? '<span class="badge" style="background:' . ($row->kategori->warna ?? '#999') . '">'
                     . $row->kategori->nama .
-                    '</span>';
+                    '</span>'
+                    : '-';
             })
 
             ->addColumn('gambar', function ($row) {
@@ -48,6 +50,9 @@ class BeritaController extends Controller
                 $updateUrl = route('backend.berita.update', $row->id);
                 return '
                     <div class="d-flex gap-1">
+                        <button class="btn btn-info btn-sm detailBerita" data-id="' . $row->id . '">
+                            <i class="bx bx-show"></i>
+                        </button>
                         <button class="btn btn-warning btn-sm editBerita"
                             data-id="' . $row->id . '"
                             data-update="' . $updateUrl . '">
@@ -56,11 +61,8 @@ class BeritaController extends Controller
                         <button class="btn btn-danger btn-sm deleteBerita" data-id="' . $row->id . '">
                             <i class="bx bx-trash"></i>
                         </button>
-                        <button class="btn btn-primary btn-sm detailBerita" data-id="' . $row->id . '">
-                            <i class="bx bx-show"></i>
-                        </button>
                     </div>
-                    ';
+                        ';
             })
 
             ->rawColumns(['kategori', 'gambar', 'status', 'action'])
@@ -117,6 +119,7 @@ class BeritaController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
+                'id' => $berita->id,
                 'judul' => $berita->judul,
                 'kategori_id' => $berita->kategori_id,
                 'kategori' => $berita->kategori->nama ?? '-',
@@ -187,11 +190,6 @@ class BeritaController extends Controller
     {
         $berita = Berita::findOrFail($id);
 
-        // Hapus gambar jika ada
-        if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
-            Storage::disk('public')->delete($berita->gambar);
-        }
-
         $berita->delete();
 
         return response()->json([
@@ -204,6 +202,49 @@ class BeritaController extends Controller
     {
         return response()->json([
             'data' => KategoriBerita::select('id', 'nama')->latest()->get()
+        ]);
+    }
+
+    // Ambil semua data yang dihapus (Sampah)
+    public function sampah()
+    {
+        $sampah = Berita::with('kategori')->onlyTrashed()->get();
+
+
+        return response()->json([
+            'message' => 'Berhasil mengambil data sampah',
+            'data' => $sampah
+        ]);
+    }
+
+    // Restore data dari sampah
+    public function restore($id)
+    {
+        $berita = Berita::with('kategori')->withTrashed()->findOrFail($id);
+
+        $berita->restore();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berita berhasil dipulihkan'
+        ]);
+    }
+
+    // Hapus permanen
+    public function forceDelete($id)
+    {
+        $berita = Berita::withTrashed()->findOrFail($id);
+
+        // 🔥 HAPUS FILE DI SINI
+        if ($berita->gambar && Storage::disk('public')->exists($berita->gambar)) {
+            Storage::disk('public')->delete($berita->gambar);
+        }
+
+        $berita->forceDelete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berita dihapus permanen'
         ]);
     }
 }

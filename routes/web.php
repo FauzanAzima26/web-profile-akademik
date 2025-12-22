@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\DosenController;
 use App\Http\Controllers\Frontend\BeritaController;
 use App\Http\Controllers\Backend\BeritaController as backendBerita;
 use App\Http\Controllers\Backend\AgendaController as backendAgenda;
+use App\Http\Controllers\Backend\ProfilProdiController as backendProfilProdi;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -40,9 +41,16 @@ Route::resource('galery', GaleriController::class)->names('frontend.galery');
 
 Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
 Route::prefix('management-konten')->group(function () {
+
     Route::get('data/berita', [backendBerita::class, 'getData'])->name('backend.berita.data');
+    Route::get('berita/sampah', [backendBerita::class, 'sampah'])->name('berita.sampah');
+    Route::post('berita/{id}/restore', [backendBerita::class, 'restore'])->name('berita.restore');
+    Route::delete('berita/{id}/force-delete', [backendBerita::class, 'forceDelete'])->name('berita.forceDelete');
     Route::get('/kategori-berita/list', [backendBerita::class, 'list']);
     Route::resource('berita', backendBerita::class)->names('backend.berita');
+
+    Route::resource('kategori-berita', KategoriBeritaController::class)->names('backend.kategori-berita');
+    Route::get('data/kategori-berita', [KategoriBeritaController::class, 'data'])->name('backend.kategori-berita.data');
 
     Route::get('data/agenda', [backendAgenda::class, 'getData'])->name('backend.agenda.data');
     Route::get('agenda/sampah', [backendAgenda::class, 'sampah'])->name('agenda.sampah');
@@ -50,8 +58,8 @@ Route::prefix('management-konten')->group(function () {
     Route::delete('agenda/{id}/force-delete', [backendAgenda::class, 'forceDelete'])->name('agenda.forceDelete');
     Route::resource('agenda', backendAgenda::class)->names('backend.agenda');
 
-    Route::resource('kategori-berita', KategoriBeritaController::class)->names('backend.kategori-berita');
-    Route::get('data/kategori-berita', [KategoriBeritaController::class, 'data'])->name('backend.kategori-berita.data');
+    Route::resource('profil/prodi', backendProfilProdi::class)->names('backend.profil.prodi');
+
 
     Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
     Route::resource('struktur', StrukturController::class)->names('frontend.struktur');

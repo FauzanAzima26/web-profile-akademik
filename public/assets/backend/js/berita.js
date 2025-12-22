@@ -144,43 +144,6 @@ $(function () {
         });
     });
 
-    // ==== SIMPAN BERITA ====
-    $("#formCreate").on("submit", function (e) {
-        e.preventDefault();
-
-        let id = $("#beritaId").val(); // ambil id, kosong = tambah
-        let formData = new FormData(this);
-
-        // Ambil URL update dari tombol edit jika ada
-        let url = id
-            ? $("#formCreate").data("update") || updateUrl + "/" + id
-            : storeUrl;
-
-        if (id) formData.append("_method", "PUT"); // method spoofing untuk update
-
-        $.ajax({
-            url: url,
-            type: "POST", // selalu POST untuk AJAX + _method
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (res) {
-                if (res.status) {
-                    $("#modalCreate").modal("hide");
-                    beritaTable.ajax.reload();
-                    Swal.fire("Berhasil", res.message, "success");
-                }
-            },
-            error: function (xhr) {
-                Swal.fire(
-                    "Error",
-                    xhr.responseJSON?.message ?? "Terjadi kesalahan",
-                    "error"
-                );
-            },
-        });
-    });
-
     // DELETE KATEGORI
     $(document).on("click", ".deleteKategori", function () {
         let id = $(this).data("id");
@@ -252,50 +215,63 @@ $(function () {
     });
 
     // --- OPEN MODAL EDIT ---
-    $(document).on("click", ".editBerita", function () {
-        let id = $(this).data("id");
+    $(document).on("click", ".editBerita", function (e) {
+        e.preventDefault();
+
+        let id = e.currentTarget.dataset.id; // 🔥 FIX
+
+        console.log("EDIT ID =", id);
 
         $.get("/management-konten/berita/" + id, function (res) {
             let data = res.data;
+
+            $("#beritaId").val(data.id);
+            console.log("INPUT ID =", $("#beritaId").val());
 
             $("#judul").val(data.judul);
             $("#konten").val(data.konten);
             $("#penulis").val(data.penulis);
 
-            loadKategori(data.kategori_id); // 🔥 SELECT OTOMATIS
+            loadKategori(data.kategori_id);
 
             $("#modalCreate").modal("show");
         });
     });
 
-    // --- SIMPAN / UPDATE BERITA ---\
+    // ==== SIMPAN / UPDATE BERITA (FINAL) ====
     $("#formCreate")
         .off("submit")
         .on("submit", function (e) {
             e.preventDefault();
+
             let id = $("#beritaId").val();
             let formData = new FormData(this);
 
-            let ajaxUrl = id ? "/management-konten/berita/" + id : storeUrl;
-            if (id) formData.append("_method", "PUT"); // method spoofing update
+            let ajaxUrl = id
+                ? "/management-konten/berita/" + id
+                : $("#btnAdd").data("store");
+
+            if (id) {
+                formData.append("_method", "PUT");
+            }
 
             $.ajax({
                 url: ajaxUrl,
-                type: "POST", // selalu POST untuk AJAX + _method
+                type: "POST",
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (res) {
                     $("#modalCreate").modal("hide");
-                    beritaTable.ajax.reload();
+                    $("#beritaId").val(""); // reset ID
+                    beritaTable.ajax.reload(null, false);
                     Swal.fire("Berhasil", res.message, "success");
                 },
                 error: function (xhr) {
                     if (xhr.status === 422) {
-                        let errors = xhr.responseJSON.errors;
                         let msg = "";
-                        $.each(errors, function (key, val) {
-                            msg += val + "\n";
+                        $.each(xhr.responseJSON.errors, function (k, v) {
+                            msg += v + "\n";
                         });
                         Swal.fire("Error", msg, "error");
                     } else {
@@ -359,4 +335,113 @@ $(function () {
             },
         });
     }
+
+    // ===== Baru saja dihapus =====
+
+    // Saat tombol "Baru Saja Dihapus" diklik, buka modal & ambil data
+    $("#btnSampahBerita").on("click", function () {
+        $("#modalSampahBerita").modal("show");
+        fetchSampahBerita();
+    });
+
+    function fetchSampahBerita() {
+        $.ajax({
+            url: "/management-konten/berita/sampah",
+            type: "GET",
+            success: function (res) {
+                let tbody = "";
+
+                if (res.data && res.data.length > 0) {
+                    res.data.forEach(function (item) {
+                        let tanggalHapus = item.deleted_at
+                            ? new Date(item.deleted_at).toLocaleString("id-ID")
+                            : "-";
+
+                        let kategori = item.kategori?.nama ?? "-";
+
+                        tbody += `
+                        <tr>
+                            <td>${item.judul}</td>
+                            <td>${kategori}</td>
+                            <td>${item.penulis}</td>
+                            <td>${tanggalHapus}</td>
+                            <td class="text-center">
+                                <button class="btn btn-success btn-sm restore-btn" data-id="${item.id}">
+                                    Restore
+                                </button>
+                                <button class="btn btn-danger btn-sm delete-btn" data-id="${item.id}">
+                                    Hapus Permanen
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    });
+                } else {
+                    tbody = `
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Tidak ada berita dihapus
+                        </td>
+                    </tr>
+                `;
+                }
+
+                $("#tableSampahBerita tbody").html(tbody);
+            },
+        });
+    }
+
+    // Restore
+    $(document).on("click", ".restore-btn", function () {
+        let id = $(this).data("id");
+
+        $.ajax({
+            url: `/management-konten/berita/${id}/restore`,
+            type: "POST",
+            success: function (res) {
+                alert(res.message);
+
+                // refresh tabel sampah
+                fetchSampahBerita();
+
+                // 🔥 refresh tabel barang utama
+                beritaTable.ajax.reload(null, false);
+
+                // optional: tutup modal
+                $("#modalSampahBerita").modal("hide");
+            },
+        });
+    });
+
+    // Force Delete
+    $(document).on("click", ".delete-btn", function () {
+        if (!confirm("Apakah yakin ingin menghapus permanen?")) return;
+
+        let id = $(this).data("id");
+
+        $.ajax({
+            url: `/management-konten/berita/${id}/force-delete`,
+            type: "POST",
+            data: {
+                _method: "DELETE",
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (res) {
+                if (res.success === false) {
+                    alert(res.message);
+                    return;
+                }
+
+                alert(res.message);
+                fetchSampahBerita();
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    alert(xhr.responseJSON.message);
+                } else {
+                    alert("Terjadi kesalahan");
+                }
+            },
+        });
+    });
 });

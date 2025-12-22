@@ -65,9 +65,9 @@
         </li>
 
         <!-- management konten -->
-        <li class="menu-item {{ request()->routeIs('backend.berita.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('backend.berita.*', 'backend.agenda.*', 'backend.profil.prodi.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <i class="menu-icon tf-icons bx bx-folder-open"></i>
                 <div data-i18n="Layouts">Managemen konten</div>
             </a>
 
@@ -77,13 +77,13 @@
                         <div data-i18n="Without menu">Berita</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->routeIs('backend.agenda.*' ? 'active' : '') }}">
+                <li class="menu-item {{ request()->routeIs('backend.agenda.*') ? 'active' : '' }}">
                     <a href="{{ route('backend.agenda.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Agenda</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('backend.profil.prodi.*') ? 'active' : '' }}">
+                    <a href="{{ route('backend.profil.prodi.index') }}" class="menu-link">
                         <div data-i18n="Container">Profil prodi</div>
                     </a>
                 </li>
@@ -98,7 +98,7 @@
         <!-- management akademik -->
         <li class="menu-item">
             <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <i class="menu-icon tf-icons bx bx-chalkboard"></i>
                 <div data-i18n="Layouts">Managemen akademik</div>
             </a>
 
@@ -134,7 +134,7 @@
         <!-- penelitian & pengabdian -->
         <li class="menu-item">
             <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <i class="menu-icon tf-icons bx bx-bulb"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
             </a>
 
@@ -160,7 +160,7 @@
         <!-- prestasi dan galeri -->
         <li class="menu-item">
             <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <i class="menu-icon tf-icons bx bx-award"></i>
                 <div data-i18n="Layouts">Prestasi & Galeri</div>
             </a>
 
@@ -181,7 +181,7 @@
         <!-- Menu -->
         <li class="menu-item">
             <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <i class="menu-icon tf-icons bx bx-menu"></i>
                 <div data-i18n="Layouts">Menu & Navigasi</div>
             </a>
 
