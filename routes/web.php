@@ -58,6 +58,10 @@ Route::prefix('management-konten')->group(function () {
     Route::delete('agenda/{id}/force-delete', [backendAgenda::class, 'forceDelete'])->name('agenda.forceDelete');
     Route::resource('agenda', backendAgenda::class)->names('backend.agenda');
 
+    Route::get('data/profil/prodi', [backendProfilProdi::class, 'getData'])->name('backend.profil.prodi.data');
+    Route::get('profil/prodi/sampah', [backendProfilProdi::class, 'sampah'])->name('backend.profil.prodi.sampah');
+    Route::post('profil/prodi/{id}/restore', [backendProfilProdi::class, 'restore'])->name('backend.profil.prodi.restore');
+    Route::delete('profil/prodi/{id}/force-delete', [backendProfilProdi::class, 'forceDelete'])->name('backend.profil.prodi.forceDelete');
     Route::resource('profil/prodi', backendProfilProdi::class)->names('backend.profil.prodi');
 
 

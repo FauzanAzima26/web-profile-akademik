@@ -2,44 +2,47 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="fw-bold mt-5 mb-3">Manajemen Berita</h4>
+        <h4 class="fw-bold mt-5 mb-3">Manajemen Profil Prodi</h4>
 
         <div class="d-flex flex-wrap gap-2 mb-3">
-            <button type="button" class="btn btn-success btn-sm d-flex align-items-center" id="btnAdd" data-store="{{ route('backend.berita.store') }}>
-                <i class="ti ti-plus me-1"></i> Tambah Data
+            <button type="button"
+                class="btn btn-success btn-sm d-flex align-items-center"
+                id="btnAdd">
+                <i class="ti ti-plus me-1"></i> Tambah Profil
             </button>
 
-            <button type="button" class="btn btn-warning btn-sm d-flex align-items-center" id="btnAddKategori">
-                <i class="ti ti-trash me-1"></i> Tambah Kategori
-            </button>
-            <button type="button" class="btn btn-danger btn-sm d-flex align-items-center" id="btnSampahProfilProdi">
+            <button type="button"
+                class="btn btn-danger btn-sm d-flex align-items-center"
+                id="btnSampah">
                 <i class="ti ti-trash me-1"></i> Baru Saja Dihapus
             </button>
         </div>
 
-        <table class="table table-bordered table-striped" id="beritaTable" data-url="{{ route('backend.berita.data') }}">
+        <table class="table table-bordered table-striped"
+            id="profilTable"
+            data-url="{{ route('backend.profil.prodi.data') }}">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Kategori</th>
-                    <th>Gambar</th>
-                    <th>Penulis</th>
-                    <th>Views</th>
-                    <th>Status</th>
-                    <th width="120px">Aksi</th>
+                    <th width="50">No</th>
+                    <th>Nama Prodi</th>
+                    <th>Akreditasi</th>
+                    <th>Tahun Berdiri</th>
+                    <th>Visi</th>
+                    <th>Misi</th>
+                    <th>Tujuan</th>
+                    <th width="120">Aksi</th>
                 </tr>
             </thead>
         </table>
     </div>
 
-    @include('Backend.ManagementKonten.berita.ModalBerita')
+    {{-- Modal Tambah/Edit Profil --}}
+    @include('Backend.ManagementKonten.profil-prodi.ModalProfil')
 
-    @include('Backend.ManagementKonten.berita.KategoriBerita')
-
-    @include('Backend.ManagementKonten.berita.detailBerita')
+    {{-- Modal Sampah / Restore --}}
+    @include('Backend.ManagementKonten.profil-prodi.BaruDihapus')
 
     @push('scripts')
-        <script src="{{ asset('assets/backend/js/berita.js') }}"></script>
+        <script src="{{ asset('assets/backend/js/profil-prodi.js') }}"></script>
     @endpush
 @endsection

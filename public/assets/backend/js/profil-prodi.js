@@ -1,11 +1,11 @@
 $(function () {
     let storeUrl = $("#formCreate").data("store");
-    let updateUrl = "/management-konten/agenda";
+    let updateUrl = "/management-konten/profil/prodi";
 
-    let agendaTable = $("#agendaTable").DataTable({
+    let profilTable = $("#profilTable").DataTable({
         processing: true,
         serverSide: true,
-        ajax: $("#agendaTable").data("url"),
+        ajax: $("#profilTable").data("url"),
         columns: [
             {
                 data: "DT_RowIndex",
@@ -14,26 +14,28 @@ $(function () {
                 searchable: false,
             },
             {
-                data: "judul",
-                name: "judul",
+                data: "nama_prodi",
+                name: "nama_prodi",
             },
             {
-                data: "tanggal_mulai",
-                name: "tanggal_mulai",
+                data: "akreditasi",
+                name: "akreditasi",
             },
             {
-                data: "tanggal_selesai",
-                name: "tanggal_selesai",
+                data: "tahun_berdiri",
+                name: "tahun_berdiri",
             },
             {
-                data: "lokasi",
-                name: "lokasi",
+                data: "visi",
+                name: "visi",
             },
             {
-                data: "gambar",
-                name: "gambar",
-                orderable: false,
-                searchable: false,
+                data: "misi",
+                name: "misi",
+            },
+            {
+                data: "tujuan",
+                name: "tujuan",
             },
             {
                 data: "aksi",
@@ -44,20 +46,19 @@ $(function () {
         ],
     });
 
-    // ===== OPEN MODAL ADD =====
-    $("#btnAddAgenda").on("click", function () {
+    // // ===== OPEN MODAL ADD =====
+    $("#btnAdd").on("click", function () {
         $("#formCreate")[0].reset();
-        $("#agendaId").val(""); // hapus id, supaya dianggap tambah
-        $("#modalTitle").text("Tambah Agenda");
-        $("#previewGambar").html(""); // hapus preview gambar
+        $("#profilId").val(""); // hapus id, supaya dianggap tambah
+        $("#modalTitle").text("Tambah Data");
         $("#modalCreate").modal("show");
     });
 
-    // ==== SIMPAN BERITA ====
+    // // ==== SIMPAN BERITA ====
     $("#formCreate").on("submit", function (e) {
         e.preventDefault();
 
-        let id = $("#agendaId").val(); // ambil id, kosong = tambah
+        let id = $("#profilId").val(); // ambil id, kosong = tambah
         let formData = new FormData(this);
 
         // Ambil URL update dari tombol edit jika ada
@@ -76,7 +77,7 @@ $(function () {
             success: function (res) {
                 if (res.status) {
                     $("#modalCreate").modal("hide");
-                    agendaTable.ajax.reload();
+                    profilTable.ajax.reload();
                     Swal.fire("Berhasil", res.message, "success");
                 }
             },
@@ -90,44 +91,36 @@ $(function () {
         });
     });
 
-    // --- OPEN MODAL EDIT ---
-    $(document).on("click", ".editAgenda", function () {
+    // // --- OPEN MODAL EDIT ---
+    $(document).on("click", ".editProfil", function () {
         // RESET FORM & FILE INPUT
         $("#formCreate")[0].reset();
         $("#formCreate input[type=file]").val(null);
-        $("#previewGambar").html("");
 
         let id = $(this).data("id");
 
-        $.get("/management-konten/agenda/" + id, function (res) {
-            let data = res.data;
+        $.get("/management-konten/profil/prodi/" + id, function (res) {
+            let data = res.data;;
 
-            $("#agendaId").val(id);
-            $("#judul").val(data.judul);
-            $("#tanggal_mulai").val(data.tanggal_mulai);
-            $("#tanggal_selesai").val(data.tanggal_selesai);
-            $("#lokasi").val(data.lokasi);
-            $("#deskripsi").val(data.deskripsi);
+            $("#profilId").val(id);
+            $("#nama_prodi").val(data.nama_prodi);
+            $("#akreditasi").val(data.akreditasi);
+            $("#tahun_berdiri").val(data.tahun_berdiri);
+            $("#visi").val(data.visi);
+            $("#misi").val(data.misi);
+            $("#tujuan").val(data.tujuan);
 
-            if (data.gambar) {
-                $("#previewGambar").html(
-                    `<img src="${data.gambar}" class="img-fluid" style="max-height:200px;">`
-                );
-            } else {
-                $("#previewGambar").html("Tidak ada gambar");
-            }
-
-            $("#modalTitle").text("Edit Agenda");
+            $("#modalTitle").text("Edit Profil");
             $("#modalCreate").modal("show");
         });
     });
 
-    // ==== DELETE BERITA ====
-    $(document).on("click", ".deleteAgenda", function () {
+    // // ==== DELETE BERITA ====
+    $(document).on("click", ".deleteProfil", function () {
         let id = $(this).data("id");
 
         Swal.fire({
-            title: "Yakin ingin menghapus Agenda ini?",
+            title: "Yakin ingin menghapus data ini?",
             text: "Data yang dihapus tidak bisa dikembalikan!",
             icon: "warning",
             showCancelButton: true,
@@ -136,7 +129,7 @@ $(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/management-konten/agenda/" + id,
+                    url: "/management-konten/profil/prodi/" + id,
                     type: "POST", // method spoofing
                     data: {
                         _method: "DELETE",
@@ -144,69 +137,29 @@ $(function () {
                     },
                     success: function (res) {
                         if (res.status) {
-                            agendaTable.ajax.reload(null, false); // reload DataTables tanpa reset paging
+                            profilTable.ajax.reload(null, false); // reload DataTables tanpa reset paging
                             Swal.fire("Terhapus!", res.message, "success");
                         }
                     },
                     error: function (xhr) {
-                        Swal.fire("Error", "Gagal menghapus agenda!", "error");
+                        Swal.fire("Error", "Gagal menghapus profil!", "error");
                     },
                 });
             }
         });
     });
 
-    // DETAIL Agenda
-    $(document).on("click", ".detailAgenda", function () {
-        let id = $(this).data("id");
+    // // ===== Baru saja dihapus =====
 
-        $.ajax({
-            url: "/management-konten/agenda/" + id, // sesuaikan route
-            type: "GET",
-            success: function (res) {
-                if (res.status) {
-                    const data = res.data;
-
-                    $("#detailJudul").text(data.judul);
-                    $("#detailTanggalMulai").text(data.tanggal_mulai);
-                    $("#detailTanggalSelesai").text(data.tanggal_selesai);
-                    $("#detailLokasi").text(data.lokasi);
-                    $("#detailDeskripsi").text(data.deskripsi);
-
-                    if (data.gambar) {
-                        $("#detailGambar").html(
-                            '<img src="' +
-                                data.gambar +
-                                '" class="img-fluid" style="max-height:200px;">'
-                        );
-                    } else {
-                        $("#detailGambar").html("-");
-                    }
-
-                    $("#modalDetail").modal("show");
-                }
-            },
-            error: function (xhr) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Gagal mengambil data detail!",
-                });
-            },
-        });
+    // // Saat tombol "Baru Saja Dihapus" diklik, buka modal & ambil data
+    $("#btnSampah").on("click", function () {
+        $("#modalSampah").modal("show");
+        fetchSampah();
     });
 
-    // ===== Baru saja dihapus =====
-
-    // Saat tombol "Baru Saja Dihapus" diklik, buka modal & ambil data
-    $("#btnSampahAgenda").on("click", function () {
-        $("#modalSampahAgenda").modal("show");
-        fetchSampahAgenda();
-    });
-
-    function fetchSampahAgenda() {
+    function fetchSampah() {
         $.ajax({
-            url: "/management-konten/agenda/sampah",
+            url: "/management-konten/profil/prodi/sampah",
             type: "GET",
             success: function (res) {
                 let tbody = "";
@@ -217,13 +170,14 @@ $(function () {
                             ? new Date(item.deleted_at).toLocaleString("id-ID")
                             : "-";
 
-                        let userHapus = item.deleted_by
-                            ? item.deleted_by.name
-                            : "-";
-
                         tbody += `
                         <tr>
-                            <td>${item.judul}</td>
+                            <td>${item.nama_prodi}</td>
+                            <td>${item.tahun_berdiri}</td>
+                            <td>${item.akreditasi}</td>
+                            <td>${item.visi}</td>
+                            <td>${item.misi}</td>
+                            <td>${item.tujuan}</td>
                             <td>${tanggalHapus}</td>
                             <td class="text-center">
                                 <button class="btn btn-success btn-sm restore-btn" data-id="${item.id}">
@@ -240,47 +194,47 @@ $(function () {
                     tbody = `
                     <tr>
                         <td colspan="4" class="text-center">
-                            Tidak ada Agenda sampah
+                            Tidak ada sampah yang baru dihapus
                         </td>
                     </tr>
                 `;
                 }
 
-                $("#tableSampahAgenda tbody").html(tbody);
+                $("#tableSampah tbody").html(tbody);
             },
         });
     }
 
-    // Restore
+    // // Restore
     $(document).on("click", ".restore-btn", function () {
         let id = $(this).data("id");
 
         $.ajax({
-            url: `/management-konten/agenda/${id}/restore`,
+            url: `/management-konten/profil/prodi/${id}/restore`,
             type: "POST",
             success: function (res) {
                 alert(res.message);
 
                 // refresh tabel sampah
-                fetchSampahAgenda();
+                fetchSampah();
 
                 // 🔥 refresh tabel barang utama
-                agendaTable.ajax.reload(null, false);
+                profilTable.ajax.reload(null, false);
 
                 // optional: tutup modal
-                $("#modalSampahAgenda").modal("hide");
+                $("#modalSampah").modal("hide");
             },
         });
     });
 
-    // Force Delete
+    // // Force Delete
     $(document).on("click", ".delete-btn", function () {
         if (!confirm("Apakah yakin ingin menghapus permanen?")) return;
 
         let id = $(this).data("id");
 
         $.ajax({
-            url: `/management-konten/agenda/${id}/force-delete`,
+            url: `/management-konten/profil/prodi/${id}/force-delete`,
             type: "POST",
             data: {
                 _method: "DELETE",
@@ -293,7 +247,7 @@ $(function () {
                 }
 
                 alert(res.message);
-                fetchSampahAgenda();
+                fetchSampah();
             },
             error: function (xhr) {
                 if (xhr.status === 422) {

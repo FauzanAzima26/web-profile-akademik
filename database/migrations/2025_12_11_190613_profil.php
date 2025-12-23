@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('visi');
             $table->longText('misi');
             $table->longText('tujuan')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
