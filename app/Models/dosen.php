@@ -13,15 +13,15 @@ class Dosen extends Model
     protected $table = 'dosens';
 
     protected $fillable = [
-        'nama',
         'nidn',
-        'jabatan',
+        'nama',
+        'gelar_depan',
+        'gelar_belakang',
         'foto',
-        'user_id',
+        'jabatan',
+        'bidang_keahlian',
+        'email',
+        'telepon',
+        'status',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

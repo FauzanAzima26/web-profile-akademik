@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\dosen;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class DosenController extends Controller
 {
@@ -14,102 +15,221 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosens = dosen::all();
-        return view('backend.dosen.index', compact('dosens'));
+        return view('Backend.ManagementAkademik.dosen.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getData()
     {
-        return view('backend.dosen.create');
+        $agenda = Dosen::query();
+
+        return DataTables::of($agenda)
+            ->addIndexColumn()
+            ->addColumn('foto', function ($row) {
+                if ($row->foto) {
+                    return '<img src="' . asset('storage/dosen/' . $row->foto) . '" width="60">';
+                }
+                return '-';
+            })
+            ->addColumn('aksi', function ($row) {
+                $updateUrl = route('dosen.update', $row->id);
+                return '
+                <div class="d-flex gap-1">
+                    <button class="btn btn-info btn-sm detailBtn" data-id="' . $row->id . '">
+                        <i class="bx bx-show"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm editBtn"
+                        data-id="' . $row->id . '"
+                        data-update="' . $updateUrl . '">
+                        <i class="bx bx-edit"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm deleteBtn" data-id="' . $row->id . '">
+                        <i class="bx bx-trash"></i>
+                    </button>
+                    </div>
+            ';
+            })
+            ->rawColumns(['foto', 'aksi'])
+            ->make(true);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:20',
-            'jabatan' => 'nullable|string|max:255',
-            'bidang_keahlian' => 'nullable|string|max:255',
-            'pendidikan' => 'nullable|string|max:255',
-            'email' => 'nullable|email',
-            'telepon' => 'nullable|string|max:20',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nidn' => 'required',
+            'nama' => 'required',
+            'gelar_depan' => 'required',
+            'gelar_belakang' => 'required',
+            'jabatan' => 'required',
+            'bidang_keahlian' => 'required',
+            'email' => 'required',
+            'telepon' => 'required',
+            'status' => 'required',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'nip', 'jabatan', 'bidang_keahlian', 'pendidikan', 'email', 'telepon']);
-        $data['user_id'] = auth()->id() ?? 1; // Default to 1 if not authenticated
+        $data = $request->all();
 
+        // upload gambar
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('dosen', 'public');
+            $file = $request->file('foto');
+            $nama = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('dosen', $nama, 'public');
+            $data['foto'] = $nama;
         }
 
-        dosen::create($data);
+        // simpan berita
+        $agenda = Dosen::create($data);
 
-        return redirect()->route('backend.dosen.index')->with('success', 'Dosen created successfully.');
+        return response()->json([
+            'status' => true,
+            'message' => 'Data berhasil ditambahkan',
+            'data' => $agenda
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(dosen $dosen)
+    public function show($id)
     {
-        return view('backend.dosen.show', compact('dosen'));
+        $agenda = Dosen::findOrFail($id);
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'nidn' => $agenda->nidn,
+                'nama' => $agenda->nama,
+                'gelar_depan' => $agenda->gelar_depan,
+                'gelar_belakang' => $agenda->gelar_belakang,
+                'bidang_keahlian' => $agenda->bidang_keahlian,
+                'jabatan' => $agenda->jabatan,
+                'email' => $agenda->email,
+                'telepon' => $agenda->telepon,
+                'status' => $agenda->status,
+                'foto' => $agenda->foto ? asset('storage/dosen/' . $agenda->foto) : null,
+            ]
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(dosen $dosen)
-    {
-        return view('backend.dosen.edit', compact('dosen'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, dosen $dosen)
+    public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:20',
-            'jabatan' => 'nullable|string|max:255',
-            'bidang_keahlian' => 'nullable|string|max:255',
-            'pendidikan' => 'nullable|string|max:255',
-            'email' => 'nullable|email',
-            'telepon' => 'nullable|string|max:20',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nidn' => 'sometimes|required|string|max:50',
+            'nama' => 'sometimes|required|string|max:255',
+            'gelar_depan' => 'sometimes|nullable|string|max:50',
+            'gelar_belakang' => 'sometimes|nullable|string|max:50',
+            'jabatan' => 'sometimes|nullable|string|max:100',
+            'bidang_keahlian' => 'sometimes|nullable|string|max:150',
+            'email' => 'sometimes|nullable|email|max:255',
+            'telepon' => 'sometimes|nullable|string|max:20',
+            'status' => 'sometimes|nullable|in:aktif,nonaktif',
+            'foto' => 'sometimes|nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $data = $request->only(['nama', 'nip', 'jabatan', 'bidang_keahlian', 'pendidikan', 'email', 'telepon']);
+        $agenda = Dosen::findOrFail($id);
 
+        // update data selain foto
+        $data = array_filter(
+            $request->only([
+                'nidn',
+                'nama',
+                'gelar_depan',
+                'gelar_belakang',
+                'jabatan',
+                'bidang_keahlian',
+                'email',
+                'telepon',
+                'status',
+            ]),
+            fn($v) => $v !== null
+        );
+
+        $agenda->update($data);
+
+        // handle foto
         if ($request->hasFile('foto')) {
-            if ($dosen->foto) {
-                Storage::disk('public')->delete($dosen->foto);
+
+            if ($agenda->foto && Storage::disk('public')->exists('dosen/' . $agenda->foto)) {
+                Storage::disk('public')->delete('dosen/' . $agenda->foto);
             }
-            $data['foto'] = $request->file('foto')->store('dosen', 'public');
+
+            $file = $request->file('foto');
+            $namaFoto = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('dosen', $namaFoto, 'public');
+
+            $agenda->update(['foto' => $namaFoto]);
         }
 
-        $dosen->update($data);
-
-        return redirect()->route('backend.dosen.index')->with('success', 'Dosen updated successfully.');
+        return response()->json([
+            'status' => true,
+            'message' => 'Data berhasil diperbarui',
+            'data' => $agenda
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(dosen $dosen)
+    public function destroy($id)
     {
-        if ($dosen->foto) {
-            Storage::disk('public')->delete($dosen->foto);
-        }
-        $dosen->delete();
+        $agenda = Dosen::findOrFail($id);
 
-        return redirect()->route('backend.dosen.index')->with('success', 'Dosen deleted successfully.');
+        // JANGAN hapus gambar saat soft delete
+        $agenda->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Data berhasil dipindahkan ke sampah'
+        ]);
+    }
+
+    public function sampah()
+    {
+        $sampah = Dosen::onlyTrashed()->get();
+
+        return response()->json([
+            'message' => 'Berhasil mengambil data sampah',
+            'data' => $sampah->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'nidn' => $item->nidn,
+                    'nama' => $item->nama,
+                    'gelar_depan' => $item->gelar_depan,
+                    'gelar_belakang' => $item->gelar_belakang,
+                    'jabatan' => $item->jabatan,
+                    'bidang_keahlian' => $item->bidang_keahlian,
+                    'email' => $item->email,
+                    'telepon' => $item->telepon,
+                    'status' => $item->status,
+                    'deleted_at' => $item->deleted_at,
+                    'foto' => $item->foto
+                        ? asset('storage/dosen/' . $item->foto)
+                        : null
+                ];
+            })
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $barang = Dosen::withTrashed()->findOrFail($id);
+
+        $barang->restore();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Agenda berhasil dipulihkan'
+        ]);
+    }
+
+    public function forceDelete($id)
+    {
+        $agenda = Dosen::withTrashed()->findOrFail($id);
+
+        // Hapus file foto
+        if ($agenda->foto && Storage::disk('public')->exists('dosen/' . $agenda->foto)) {
+            Storage::disk('public')->delete('dosen/' . $agenda->foto);
+        }
+
+        $agenda->forceDelete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil dihapus permanen'
+        ]);
     }
 }

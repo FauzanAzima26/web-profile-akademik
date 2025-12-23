@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\BeritaController as backendBerita;
 use App\Http\Controllers\Backend\AgendaController as backendAgenda;
 use App\Http\Controllers\Backend\ProfilProdiController as backendProfilProdi;
 use App\Http\Controllers\Backend\StrukturOrganisasiController as backendStrukturOrganisasi;
+use App\Http\Controllers\Backend\DosenController as backendDosen;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -75,6 +76,15 @@ Route::prefix('management-konten')->group(function () {
     Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
     Route::resource('struktur', StrukturController::class)->names('frontend.struktur');
     Route::resource('akreditasi', AkreditasiController::class)->names('frontend.akreditasi');
+});
+
+Route::prefix('management-akademik')->group(function () {
+
+    Route::get('data/dosen', [backendDosen::class, 'getData'])->name('dosen.data');
+    Route::get('dosen/sampah', [backendDosen::class, 'sampah'])->name('dosen.sampah');
+    Route::post('dosen/{id}/restore', [backendDosen::class, 'restore'])->name('dosen.restore');
+    Route::delete('dosen/{id}/force-delete', [backendDosen::class, 'forceDelete'])->name('dosen.forceDelete');
+    Route::resource('dosen', backendDosen::class)->names('dosen');
 });
 
 /*

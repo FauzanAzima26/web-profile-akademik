@@ -97,15 +97,15 @@
         </li>
 
         <!-- management akademik -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('dosen.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-chalkboard"></i>
                 <div data-i18n="Layouts">Managemen akademik</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('dosen.*') ? 'active' : '' }}">
+                    <a href="{{ route('dosen.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Data dosen</div>
                     </a>
                 </li>
