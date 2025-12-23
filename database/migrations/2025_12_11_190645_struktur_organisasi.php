@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('foto')->nullable();
             $table->integer('urutan')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

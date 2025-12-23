@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\BeritaController;
 use App\Http\Controllers\Backend\BeritaController as backendBerita;
 use App\Http\Controllers\Backend\AgendaController as backendAgenda;
 use App\Http\Controllers\Backend\ProfilProdiController as backendProfilProdi;
+use App\Http\Controllers\Backend\StrukturOrganisasiController as backendStrukturOrganisasi;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -63,6 +64,12 @@ Route::prefix('management-konten')->group(function () {
     Route::post('profil/prodi/{id}/restore', [backendProfilProdi::class, 'restore'])->name('backend.profil.prodi.restore');
     Route::delete('profil/prodi/{id}/force-delete', [backendProfilProdi::class, 'forceDelete'])->name('backend.profil.prodi.forceDelete');
     Route::resource('profil/prodi', backendProfilProdi::class)->names('backend.profil.prodi');
+
+    Route::get('data/struktur/organisasi', [backendStrukturOrganisasi::class, 'getData'])->name('struktur.organisasi.data');
+    Route::get('struktur/organisasi/sampah', [backendStrukturOrganisasi::class, 'sampah'])->name('struktur.organisasi.sampah');
+    Route::post('struktur/organisasi/{id}/restore', [backendStrukturOrganisasi::class, 'restore'])->name('struktur.organisasi.restore');
+    Route::delete('struktur/organisasi/{id}/force-delete', [backendStrukturOrganisasi::class, 'forceDelete'])->name('struktur.organisasi.forceDelete');
+    Route::resource('struktur/organisasi', backendStrukturOrganisasi::class)->names('struktur.organisasi');
 
 
     Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');

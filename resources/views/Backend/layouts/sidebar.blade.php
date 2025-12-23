@@ -65,7 +65,8 @@
         </li>
 
         <!-- management konten -->
-        <li class="menu-item {{ request()->routeIs('backend.berita.*', 'backend.agenda.*', 'backend.profil.prodi.*') ? 'open' : '' }}">
+        <li
+            class="menu-item {{ request()->routeIs('backend.berita.*', 'backend.agenda.*', 'backend.profil.prodi.*', 'struktur.organisasi.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-folder-open"></i>
                 <div data-i18n="Layouts">Managemen konten</div>
@@ -87,8 +88,8 @@
                         <div data-i18n="Container">Profil prodi</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
+                <li class="menu-item  {{ request()->routeIs('struktur.organisasi.*') ? 'active' : '' }}">
+                    <a href="{{ route('struktur.organisasi.index') }}" class="menu-link">
                         <div data-i18n="Fluid">Struktur organisasi</div>
                     </a>
                 </li>

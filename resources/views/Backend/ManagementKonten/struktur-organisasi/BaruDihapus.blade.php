@@ -9,12 +9,10 @@
                 <table class="table" id="tableSampah">
                     <thead>
                         <tr>
-                            <th>Nama Prodi</th>
-                            <th>Akreditasi</th>
-                            <th>Tahun Berdiri</th>
-                            <th>Visi</th>
-                            <th>Misi</th>
-                            <th>Tujuan</th>
+                            <th>Nama</th>
+                            <th>Jabatan</th>
+                            <th>Urutan</th>
+                            <th>Gambar</th>
                             <th>Tanggal dihapus</th>
                             <th>Aksi</th>
                         </tr>
