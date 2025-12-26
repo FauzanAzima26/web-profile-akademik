@@ -1,11 +1,11 @@
 $(function () {
     let storeUrl = $("#formCreate").data("store");
-    let updateUrl = "/management-akademik/dosen";
+    let updateUrl = "/management-akademik/bidang/keahlian";
 
-    let Table = $("#dosenTable").DataTable({
+    let Table = $("#keahlianTable").DataTable({
         processing: true,
         serverSide: true,
-        ajax: $("#dosenTable").data("url"),
+        ajax: $("#keahlianTable").data("url"),
         columns: [
             {
                 data: "DT_RowIndex",
@@ -14,51 +14,12 @@ $(function () {
                 searchable: false,
             },
             {
-                data: "nidn",
-                name: "nidn",
-            },
-            {
                 data: "nama",
                 name: "nama",
-                render: function (data, type, row) {
-                    let namaLengkap = "";
-
-                    if (row.gelar_depan) {
-                        namaLengkap += row.gelar_depan + " ";
-                    }
-
-                    namaLengkap += data ?? "-";
-
-                    if (row.gelar_belakang) {
-                        namaLengkap += ", " + row.gelar_belakang;
-                    }
-
-                    return namaLengkap;
-                },
             },
             {
-                data: "jabatan",
-                name: "jabatan",
-            },
-            { data: "bidang_keahlian", name: "bidang_keahlian" },
-
-            {
-                data: "email",
-                name: "email",
-            },
-            {
-                data: "telepon",
-                name: "telepon",
-            },
-            {
-                data: "status",
-                name: "status",
-            },
-            {
-                data: "foto",
-                name: "foto",
-                orderable: false,
-                searchable: false,
+                data: "deskripsi",
+                name: "deskripsi",
             },
             {
                 data: "aksi",
@@ -75,13 +36,7 @@ $(function () {
         $("#formCreate")[0].reset();
 
         // hapus id (penting!)
-        $("#dosenId").val("");
-
-        // hapus preview foto
-        $("#previewFoto").html("");
-
-        // reset file input
-        $("#foto").val(null);
+        $("#bidang_keahlian_Id").val("");
 
         // reset title
         $("#modalTitle").text("Tambah Data");
@@ -93,7 +48,7 @@ $(function () {
     $("#formCreate").on("submit", function (e) {
         e.preventDefault();
 
-        let id = $("#dosenId").val(); // ambil id, kosong = tambah
+        let id = $("#bidang_keahlian_Id").val(); // ambil id, kosong = tambah
         let formData = new FormData(this);
 
         // Ambil URL update dari tombol edit jika ada
@@ -130,31 +85,15 @@ $(function () {
     $(document).on("click", ".editBtn", function () {
         // RESET FORM & FILE INPUT
         $("#formCreate")[0].reset();
-        $("#formCreate input[type=file]").val(null);
-        $("#previewFoto").html("");
 
         let id = $(this).data("id");
 
-        $.get("/management-akademik/dosen/" + id, function (res) {
+        $.get("/management-akademik/bidang/keahlian/" + id, function (res) {
             let data = res.data;
 
-            $("#dosenId").val(id);
-            $("#nidn").val(data.nidn);
+            $("#bidang_keahlian_Id").val(id);
             $("#nama").val(data.nama);
-            $("#gelar_depan").val(data.gelar_depan);
-            $("#gelar_belakang").val(data.gelar_belakang);
-            $("#jabatan").val(data.jabatan);
-            $("#email").val(data.email);
-            $("#telepon").val(data.telepon);
-            $("#status").val(data.status);
-
-            if (data.foto) {
-                $("#previewFoto").html(
-                    `<img src="${data.foto}" class="img-fluid" style="max-height:200px;">`
-                );
-            } else {
-                $("#previewFoto").html("Tidak ada Gambar");
-            }
+            $("#deskripsi").val(data.deskripsi);
 
             $("#modalTitle").text("Edit Data");
             $("#modalCreate").modal("show");
@@ -175,7 +114,7 @@ $(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/management-akademik/dosen/" + id,
+                    url: "/management-akademik/bidang/keahlian/" + id,
                     type: "POST", // method spoofing
                     data: {
                         _method: "DELETE",
@@ -195,62 +134,6 @@ $(function () {
         });
     });
 
-    // DETAIL BERITA
-    $(document).on("click", ".detailBtn", function () {
-        let id = $(this).data("id");
-
-        $.ajax({
-            url: "/management-akademik/dosen/" + id, // sesuaikan route
-            type: "GET",
-            success: function (res) {
-                if (res.status) {
-                    const data = res.data;
-
-                    $("#detailFoto").attr(
-                        "src",
-                        data.foto ?? "/assets/img/no-image.png"
-                    );
-
-                    $("#detailNidn").text(data.nidn ?? "-");
-                    const namaLengkap =
-                        (data.gelar_depan ? data.gelar_depan + " " : "") +
-                        (data.nama ?? "-") +
-                        (data.gelar_belakang ? ", " + data.gelar_belakang : "");
-
-                    $("#detailNama").text(namaLengkap);
-
-                    $("#detailJabatan").text(data.jabatan ?? "-");
-                    $("#detailEmail").text(data.email ?? "-");
-                    $("#detailTelepon").text(data.telepon ?? "-");
-
-                    $("#detailStatusText").text(data.status ?? "-");
-
-                    // badge status
-                    if (data.status === "aktif") {
-                        $("#detailStatus")
-                            .removeClass()
-                            .addClass("badge bg-success")
-                            .text("Aktif");
-                    } else {
-                        $("#detailStatus")
-                            .removeClass()
-                            .addClass("badge bg-secondary")
-                            .text("Nonaktif");
-                    }
-
-                    $("#modalDetail").modal("show");
-                }
-            },
-            error: function (xhr) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Gagal mengambil data detail!",
-                });
-            },
-        });
-    });
-
     //     // ===== Baru saja dihapus =====
 
     // Saat tombol "Baru Saja Dihapus" diklik, buka modal & ambil data
@@ -261,7 +144,7 @@ $(function () {
 
     function fetchSampah() {
         $.ajax({
-            url: "/management-akademik/dosen/sampah",
+            url: "/management-akademik/bidang/keahlian/sampah",
             type: "GET",
             success: function (res) {
                 let tbody = "";
@@ -272,32 +155,10 @@ $(function () {
                             ? new Date(item.deleted_at).toLocaleString("id-ID")
                             : "-";
 
-                        let foto = item.foto
-                            ? `<img src="${item.foto}" class="img-thumbnail" style="max-height:80px;">`
-                            : `<span class="text-muted">Tidak ada foto</span>`;
-
                         tbody += `
                         <tr>
-                            <td>${item.nidn}</td>
-
-                            <!-- ✅ NAMA + GELAR -->
-                            <td>
-                                ${
-                                    item.gelar_depan
-                                        ? item.gelar_depan + " "
-                                        : ""
-                                }
-                                ${item.nama ?? "-"}
-                                ${
-                                    item.gelar_belakang
-                                        ? ", " + item.gelar_belakang
-                                        : ""
-                                }
-                            </td>
-
-                            <td>${item.jabatan}</td>
-                            <td>${item.status}</td>
-                            <td class="text-center">${foto}</td>
+                            <td>${item.nama}</td>
+                            <td>${item.deskripsi}</td>
                             <td>${tanggalHapus}</td>
                             <td class="text-center">
                                 <button class="btn btn-success btn-sm restore-btn" data-id="${
@@ -333,8 +194,9 @@ $(function () {
     $(document).on("click", ".restore-btn", function () {
         let id = $(this).data("id");
 
+
         $.ajax({
-            url: `/management-akademik/dosen/${id}/restore`,
+            url: `/management-akademik/bidang/keahlian/${id}/restore`,
             type: "POST",
             success: function (res) {
                 alert(res.message);
@@ -358,7 +220,7 @@ $(function () {
         let id = $(this).data("id");
 
         $.ajax({
-            url: `/management-akademik/dosen/${id}/force-delete`,
+            url: `/management-akademik/bidang/keahlian/${id}/force-delete`,
             type: "POST",
             data: {
                 _method: "DELETE",

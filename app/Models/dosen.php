@@ -19,9 +19,15 @@ class Dosen extends Model
         'gelar_belakang',
         'foto',
         'jabatan',
-        'bidang_keahlian',
         'email',
         'telepon',
         'status',
+        'bidang_keahlian_id',
     ];
+
+    public function bidangKeahlian()
+{
+    return $this->belongsTo(BidangKeahlian::class, 'bidang_keahlian_id');
+}
+
 }

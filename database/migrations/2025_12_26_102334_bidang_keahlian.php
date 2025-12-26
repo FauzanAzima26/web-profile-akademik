@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agenda', function (Blueprint $table) {
+        Schema::create('bidang_keahlian', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_selesai')->nullable();
-            $table->string('lokasi');
+            $table->string('nama');
             $table->text('deskripsi')->nullable();
-            $table->string('gambar')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

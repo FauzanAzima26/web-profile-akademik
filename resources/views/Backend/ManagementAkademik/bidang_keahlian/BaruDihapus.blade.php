@@ -9,8 +9,9 @@
                 <table class="table" id="tableSampah">
                     <thead>
                         <tr>
-                            <th>Nama Lengkap</th>
-                            <th>Jabatan</th>
+                            <th>Bidang Keahlian</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal dihapus</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

@@ -97,7 +97,7 @@
         </li>
 
         <!-- management akademik -->
-        <li class="menu-item {{ request()->routeIs('dosen.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('dosen.*', 'bidang.keahlian.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-chalkboard"></i>
                 <div data-i18n="Layouts">Managemen akademik</div>
@@ -109,8 +109,8 @@
                         <div data-i18n="Without menu">Data dosen</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('bidang.keahlian.*') ? 'active' : '' }}">
+                    <a href="{{ route('bidang.keahlian.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Bidang keahlian</div>
                     </a>
                 </li>

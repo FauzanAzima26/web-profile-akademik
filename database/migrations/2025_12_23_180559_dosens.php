@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('gelar_belakang')->nullable();
             $table->string('foto')->nullable();
             $table->string('jabatan')->nullable();
-            $table->string('bidang_keahlian')->nullable();
+            $table->foreignId('bidang_keahlian_id')->nullable()->constrained('bidang_keahlian')->nullOnDelete();
             $table->string('email')->nullable();
             $table->string('telepon')->nullable();
             $table->string('status')->default('aktif');

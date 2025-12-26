@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use App\Models\BidangKeahlian;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,15 +16,21 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('Backend.ManagementAkademik.dosen.index');
+        $bidangKeahlian = BidangKeahlian::all();
+        return view('Backend.ManagementAkademik.dosen.index', compact('bidangKeahlian'));
     }
 
     public function getData()
     {
-        $agenda = Dosen::query();
+        $agenda = Dosen::with('bidangKeahlian');
 
         return DataTables::of($agenda)
             ->addIndexColumn()
+
+            ->addColumn('bidang_keahlian', function ($row) {
+                return $row->bidangKeahlian->nama ?? '-';
+            })
+
             ->addColumn('foto', function ($row) {
                 if ($row->foto) {
                     return '<img src="' . asset('storage/dosen/' . $row->foto) . '" width="60">';
@@ -48,7 +55,7 @@ class DosenController extends Controller
                     </div>
             ';
             })
-            ->rawColumns(['foto', 'aksi'])
+            ->rawColumns(['foto', 'aksi', 'bidang_keahlian'])
             ->make(true);
     }
 
@@ -60,7 +67,7 @@ class DosenController extends Controller
             'gelar_depan' => 'required',
             'gelar_belakang' => 'required',
             'jabatan' => 'required',
-            'bidang_keahlian' => 'required',
+            'bidang_keahlian_id' => 'nullable|exists:bidang_keahlian,id',
             'email' => 'required',
             'telepon' => 'required',
             'status' => 'required',
@@ -98,8 +105,9 @@ class DosenController extends Controller
                 'nama' => $agenda->nama,
                 'gelar_depan' => $agenda->gelar_depan,
                 'gelar_belakang' => $agenda->gelar_belakang,
-                'bidang_keahlian' => $agenda->bidang_keahlian,
                 'jabatan' => $agenda->jabatan,
+                'bidang_keahlian_id' => $agenda->bidang_keahlian_id,
+                'bidang_keahlian' => $agenda->bidangKeahlian->nama ?? '-',
                 'email' => $agenda->email,
                 'telepon' => $agenda->telepon,
                 'status' => $agenda->status,
@@ -116,7 +124,6 @@ class DosenController extends Controller
             'gelar_depan' => 'sometimes|nullable|string|max:50',
             'gelar_belakang' => 'sometimes|nullable|string|max:50',
             'jabatan' => 'sometimes|nullable|string|max:100',
-            'bidang_keahlian' => 'sometimes|nullable|string|max:150',
             'email' => 'sometimes|nullable|email|max:255',
             'telepon' => 'sometimes|nullable|string|max:20',
             'status' => 'sometimes|nullable|in:aktif,nonaktif',
@@ -133,10 +140,10 @@ class DosenController extends Controller
                 'gelar_depan',
                 'gelar_belakang',
                 'jabatan',
-                'bidang_keahlian',
                 'email',
                 'telepon',
                 'status',
+                'bidang_keahlian_id',
             ]),
             fn($v) => $v !== null
         );
@@ -191,7 +198,6 @@ class DosenController extends Controller
                     'gelar_depan' => $item->gelar_depan,
                     'gelar_belakang' => $item->gelar_belakang,
                     'jabatan' => $item->jabatan,
-                    'bidang_keahlian' => $item->bidang_keahlian,
                     'email' => $item->email,
                     'telepon' => $item->telepon,
                     'status' => $item->status,

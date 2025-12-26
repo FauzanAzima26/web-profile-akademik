@@ -65,10 +65,12 @@
                     {{-- Bidang Keahlian --}}
                     <div class="mb-3">
                         <label class="form-label">Bidang Keahlian</label>
-                        <input type="text"
-                               name="bidang_keahlian"
-                               id="bidang_keahlian"
-                               class="form-control">
+                        <select name="bidang_keahlian_id" id="bidang_keahlian_id" class="form-select">
+                            <option value="">-- Pilih Bidang Keahlian --</option>
+                            @foreach ($bidangKeahlian as $bk)
+                                <option value="{{ $bk->id }}">{{ $bk->nama }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     {{-- Email --}}

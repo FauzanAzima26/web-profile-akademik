@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\AgendaController as backendAgenda;
 use App\Http\Controllers\Backend\ProfilProdiController as backendProfilProdi;
 use App\Http\Controllers\Backend\StrukturOrganisasiController as backendStrukturOrganisasi;
 use App\Http\Controllers\Backend\DosenController as backendDosen;
+use App\Http\Controllers\Backend\BidangKeahlianController as backendBidangKeahlian;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -85,6 +86,12 @@ Route::prefix('management-akademik')->group(function () {
     Route::post('dosen/{id}/restore', [backendDosen::class, 'restore'])->name('dosen.restore');
     Route::delete('dosen/{id}/force-delete', [backendDosen::class, 'forceDelete'])->name('dosen.forceDelete');
     Route::resource('dosen', backendDosen::class)->names('dosen');
+
+    Route::get('data/bidang/keahlian', [backendBidangKeahlian::class, 'getData'])->name('bidang.keahlian.data');
+    Route::get('bidang/keahlian/sampah', [backendBidangKeahlian::class, 'sampah'])->name('bidang.keahlian.sampah');
+    Route::post('bidang/keahlian/{id}/restore', [backendBidangKeahlian::class, 'restore'])->name('bidang.keahlian.restore');
+    Route::delete('bidang/keahlian/{id}/force-delete', [backendBidangKeahlian::class, 'forceDelete'])->name('bidang.keahlian.forceDelete');
+    Route::resource('bidang/keahlian', backendBidangKeahlian::class)->names('bidang.keahlian');
 });
 
 /*
