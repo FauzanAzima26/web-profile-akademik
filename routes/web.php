@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProfilProdiController as backendProfilProdi;
 use App\Http\Controllers\Backend\StrukturOrganisasiController as backendStrukturOrganisasi;
 use App\Http\Controllers\Backend\DosenController as backendDosen;
 use App\Http\Controllers\Backend\BidangKeahlianController as backendBidangKeahlian;
+use App\Http\Controllers\Backend\MataKuliahController as backendMatakuliah;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -92,6 +93,12 @@ Route::prefix('management-akademik')->group(function () {
     Route::post('bidang/keahlian/{id}/restore', [backendBidangKeahlian::class, 'restore'])->name('bidang.keahlian.restore');
     Route::delete('bidang/keahlian/{id}/force-delete', [backendBidangKeahlian::class, 'forceDelete'])->name('bidang.keahlian.forceDelete');
     Route::resource('bidang/keahlian', backendBidangKeahlian::class)->names('bidang.keahlian');
+
+    Route::get('data/mata/kuliah', [backendMatakuliah::class, 'getData'])->name('mata.kuliah.data');
+    Route::get('mata/kuliah/sampah', [backendMatakuliah::class, 'sampah']);
+    Route::post('mata/kuliah/{id}/restore', [backendMatakuliah::class, 'restore']);
+    Route::delete('mata/kuliah/{id}/force-delete', [backendMatakuliah::class, 'forceDelete']);
+    Route::resource('mata/kuliah', backendMatakuliah::class)->names('mata.kuliah');
 });
 
 /*
