@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\StrukturOrganisasiController as backendStruktur
 use App\Http\Controllers\Backend\DosenController as backendDosen;
 use App\Http\Controllers\Backend\BidangKeahlianController as backendBidangKeahlian;
 use App\Http\Controllers\Backend\MataKuliahController as backendMatakuliah;
+use App\Http\Controllers\Backend\KurikulumController as backendKurikulum;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -99,6 +100,12 @@ Route::prefix('management-akademik')->group(function () {
     Route::post('mata/kuliah/{id}/restore', [backendMatakuliah::class, 'restore']);
     Route::delete('mata/kuliah/{id}/force-delete', [backendMatakuliah::class, 'forceDelete']);
     Route::resource('mata/kuliah', backendMatakuliah::class)->names('mata.kuliah');
+
+    Route::get('data/kurikulum', [backendKurikulum::class, 'getData'])->name('kurikulum.data');
+    Route::get('kurikulum/sampah', [backendKurikulum::class, 'sampah']);
+    Route::post('kurikulum/{id}/restore', [backendKurikulum::class, 'restore']);
+    Route::delete('kurikulum/{id}/force-delete', [backendKurikulum::class, 'forceDelete']);
+    Route::resource('kurikulum', backendKurikulum::class)->names('kurikulum');
 });
 
 /*

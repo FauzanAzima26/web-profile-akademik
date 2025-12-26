@@ -97,7 +97,7 @@
         </li>
 
         <!-- management akademik -->
-        <li class="menu-item {{ request()->routeIs('dosen.*', 'bidang.keahlian.*', 'mata.kuliah.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('dosen.*', 'bidang.keahlian.*', 'mata.kuliah.*', 'kurikulum.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-chalkboard"></i>
                 <div data-i18n="Layouts">Managemen akademik</div>
@@ -119,8 +119,8 @@
                         <div data-i18n="Container">Mata kuliah</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('kurikulum.*') ? 'active' : '' }}">
+                    <a href="{{ route('kurikulum.index') }}" class="menu-link">
                         <div data-i18n="Fluid">Kurikulum</div>
                     </a>
                 </li>
