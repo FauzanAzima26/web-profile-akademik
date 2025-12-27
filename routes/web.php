@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\DosenController as backendDosen;
 use App\Http\Controllers\Backend\BidangKeahlianController as backendBidangKeahlian;
 use App\Http\Controllers\Backend\MataKuliahController as backendMatakuliah;
 use App\Http\Controllers\Backend\KurikulumController as backendKurikulum;
+use App\Http\Controllers\Backend\JadwalKuliahController as backendJadwal;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -106,6 +107,12 @@ Route::prefix('management-akademik')->group(function () {
     Route::post('kurikulum/{id}/restore', [backendKurikulum::class, 'restore']);
     Route::delete('kurikulum/{id}/force-delete', [backendKurikulum::class, 'forceDelete']);
     Route::resource('kurikulum', backendKurikulum::class)->names('kurikulum');
+
+    Route::get('data/jadwal/kuliah', [backendJadwal::class, 'getData'])->name('jadwal.kuliah.data');
+    Route::get('jadwal/kuliah/sampah', [backendJadwal::class, 'sampah']);
+    Route::post('jadwal/kuliah/{id}/restore', [backendJadwal::class, 'restore']);
+    Route::delete('jadwal/kuliah/{id}/force-delete', [backendJadwal::class, 'forceDelete']);
+    Route::resource('jadwal/kuliah', backendJadwal::class)->names('jadwal.kuliah');
 });
 
 /*
