@@ -26,8 +26,18 @@ class Dosen extends Model
     ];
 
     public function bidangKeahlian()
-{
-    return $this->belongsTo(BidangKeahlian::class, 'bidang_keahlian_id');
-}
+    {
+        return $this->belongsTo(BidangKeahlian::class, 'bidang_keahlian_id');
+    }
 
+    public function penelitian()
+    {
+        return $this->belongsToMany(
+            penelitian::class,
+            'penelitian_dosen',
+            'dosen_id',
+            'penelitian_id'
+        )
+            ->withPivot('peran');
+    }
 }

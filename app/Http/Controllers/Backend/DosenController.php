@@ -238,4 +238,11 @@ class DosenController extends Controller
             'message' => 'Data berhasil dihapus permanen'
         ]);
     }
+
+    public function list()
+    {
+        return response()->json([
+            'data' => Dosen::select('id', 'nama')->get()
+        ]);
+    }
 }

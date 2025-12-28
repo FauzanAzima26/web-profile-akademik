@@ -134,15 +134,15 @@
         </li>
 
         <!-- penelitian & pengabdian -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('penelitian.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-bulb"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('penelitian.*') ? 'active' : '' }}">
+                    <a href="{{ route('penelitian.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Data penelitian</div>
                     </a>
                 </li>

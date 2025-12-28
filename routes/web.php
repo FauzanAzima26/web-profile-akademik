@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\BidangKeahlianController as backendBidangKeahli
 use App\Http\Controllers\Backend\MataKuliahController as backendMatakuliah;
 use App\Http\Controllers\Backend\KurikulumController as backendKurikulum;
 use App\Http\Controllers\Backend\JadwalKuliahController as backendJadwal;
+use App\Http\Controllers\Backend\PenelitianController as backendPenelitian;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -113,6 +114,16 @@ Route::prefix('management-akademik')->group(function () {
     Route::post('jadwal/kuliah/{id}/restore', [backendJadwal::class, 'restore']);
     Route::delete('jadwal/kuliah/{id}/force-delete', [backendJadwal::class, 'forceDelete']);
     Route::resource('jadwal/kuliah', backendJadwal::class)->names('jadwal.kuliah');
+});
+
+Route::prefix('penelitian/pengabdian')->group(function () {
+
+    Route::get('data/penelitian', [backendPenelitian::class, 'getData'])->name('penelitian.data');
+    Route::get('penelitian/sampah', [backendPenelitian::class, 'sampah'])->name('penelitian.sampah');
+    Route::post('penelitian/{id}/restore', [backendPenelitian::class, 'restore'])->name('penelitian.restore');
+    Route::delete('penelitian/{id}/force-delete', [backendPenelitian::class, 'forceDelete'])->name('penelitian.forceDelete');
+    Route::resource('penelitian', backendPenelitian::class)->names('penelitian');
+    Route::get('/master/dosen', [backendDosen::class, 'list']);
 });
 
 /*

@@ -10,18 +10,19 @@ class Penelitian extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'penelitians';
+    protected $table = 'penelitian';
 
     protected $fillable = [
         'judul',
-        'peneliti',
+        'jenis',
         'tahun',
-        'file',
-        'user_id',
+        'abstrak',
+        'file_url',
+        'status',
     ];
 
-    public function user()
+    public function dosen()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(Dosen::class, 'penelitian_dosen', 'penelitian_id', 'dosen_id')->withPivot('peran');
     }
 }
