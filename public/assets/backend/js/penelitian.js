@@ -296,103 +296,52 @@ $(document).ready(function () {
     });
 
     // DETAIL PENELITIAN
-    // DETAIL PENELITIAN
-$(document).on("click", ".detailBtn", function () {
-    let id = $(this).data("id");
+    $(document).on("click", ".detailBtn", function () {
+        let id = $(this).data("id");
 
-    $.get("/penelitian/pengabdian/penelitian/" + id, function (res) {
-        if (!res.status) return;
+        $.get("/penelitian/pengabdian/penelitian/" + id, function (res) {
+            if (!res.status) return;
 
-        let data = res.data;
+            let data = res.data;
 
-        // ===== SET DATA =====
-        $("#detail_judul").text(data.judul ?? "-");
-        $("#detail_jenis").text(data.jenis ?? "-");
-        $("#detail_tahun").text(data.tahun ?? "-");
-        $("#detail_abstrak").text(data.abstrak ?? "-");
-        $("#detail_status").text(data.status ?? "-");
+            // ===== SET DATA =====
+            $("#detail_judul").text(data.judul ?? "-");
+            $("#detail_jenis").text(data.jenis ?? "-");
+            $("#detail_tahun").text(data.tahun ?? "-");
+            $("#detail_abstrak").text(data.abstrak ?? "-");
+            $("#detail_status").text(data.status ?? "-");
 
-        // ===== FILE =====
-        if (data.file_url) {
-            $("#detail_file").html(`
+            // ===== FILE =====
+            if (data.file_url) {
+                $("#detail_file").html(`
                 <a href="/storage/penelitian/${data.file_url}"
                    target="_blank"
                    class="btn btn-sm btn-primary">
                    Lihat PDF
                 </a>
             `);
-        } else {
-            $("#detail_file").text("-");
-        }
+            } else {
+                $("#detail_file").text("-");
+            }
 
-        // ===== DOSEN =====
-        let dosenHtml = "-";
-        if (data.dosen && data.dosen.length > 0) {
-            dosenHtml = "<ul class='mb-0'>";
-            data.dosen.forEach(d => {
-                dosenHtml += `
+            // ===== DOSEN =====
+            let dosenHtml = "-";
+            if (data.dosen && data.dosen.length > 0) {
+                dosenHtml = "<ul class='mb-0'>";
+                data.dosen.forEach((d) => {
+                    dosenHtml += `
                     <li>
                         ${d.nama}
                         ${d.pivot?.peran ? ` - <em>${d.pivot.peran}</em>` : ""}
                     </li>
                 `;
-            });
-            dosenHtml += "</ul>";
-        }
+                });
+                dosenHtml += "</ul>";
+            }
 
-        $("#detail_dosen").html(dosenHtml);
+            $("#detail_dosen").html(dosenHtml);
 
-        $("#modalDetail").modal("show");
+            $("#modalDetail").modal("show");
+        });
     });
-});
-// DETAIL PENELITIAN
-$(document).on("click", ".detailBtn", function () {
-    let id = $(this).data("id");
-
-    $.get("/penelitian/pengabdian/penelitian/" + id, function (res) {
-        if (!res.status) return;
-
-        let data = res.data;
-
-        // ===== SET DATA =====
-        $("#detail_judul").text(data.judul ?? "-");
-        $("#detail_jenis").text(data.jenis ?? "-");
-        $("#detail_tahun").text(data.tahun ?? "-");
-        $("#detail_abstrak").text(data.abstrak ?? "-");
-        $("#detail_status").text(data.status ?? "-");
-
-        // ===== FILE =====
-        if (data.file_url) {
-            $("#detail_file").html(`
-                <a href="/storage/penelitian/${data.file_url}"
-                   target="_blank"
-                   class="btn btn-sm btn-primary">
-                   Lihat PDF
-                </a>
-            `);
-        } else {
-            $("#detail_file").text("-");
-        }
-
-        // ===== DOSEN =====
-        let dosenHtml = "-";
-        if (data.dosen && data.dosen.length > 0) {
-            dosenHtml = "<ul class='mb-0'>";
-            data.dosen.forEach(d => {
-                dosenHtml += `
-                    <li>
-                        ${d.nama}
-                        ${d.pivot?.peran ? ` - <em>${d.pivot.peran}</em>` : ""}
-                    </li>
-                `;
-            });
-            dosenHtml += "</ul>";
-        }
-
-        $("#detail_dosen").html(dosenHtml);
-
-        $("#modalDetail").modal("show");
-    });
-});
-
 });

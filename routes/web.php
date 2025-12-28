@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\MataKuliahController as backendMatakuliah;
 use App\Http\Controllers\Backend\KurikulumController as backendKurikulum;
 use App\Http\Controllers\Backend\JadwalKuliahController as backendJadwal;
 use App\Http\Controllers\Backend\PenelitianController as backendPenelitian;
+use App\Http\Controllers\Backend\PengabdianController as backendPengabdian;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -124,6 +125,12 @@ Route::prefix('penelitian/pengabdian')->group(function () {
     Route::delete('penelitian/{id}/force-delete', [backendPenelitian::class, 'forceDelete'])->name('penelitian.forceDelete');
     Route::resource('penelitian', backendPenelitian::class)->names('penelitian');
     Route::get('/master/dosen', [backendDosen::class, 'list']);
+
+    Route::get('data/pengabdian', [backendPengabdian::class, 'getData'])->name('pengabdian.data');
+    Route::get('pengabdian/sampah', [backendPengabdian::class, 'sampah'])->name('pengabdian.sampah');
+    Route::post('pengabdian/{id}/restore', [backendPengabdian::class, 'restore'])->name('pengabdian.restore');
+    Route::delete('pengabdian/{id}/force-delete', [backendPengabdian::class, 'forceDelete'])->name('pengabdian.forceDelete');
+    Route::resource('pengabdian', backendPengabdian::class)->names('pengabdian');
 });
 
 /*

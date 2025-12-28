@@ -134,7 +134,7 @@
         </li>
 
         <!-- penelitian & pengabdian -->
-        <li class="menu-item {{ request()->routeIs('penelitian.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('penelitian.*', 'pengabdian.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-bulb"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
@@ -146,14 +146,9 @@
                         <div data-i18n="Without menu">Data penelitian</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('pengabdian.*') ? 'active' : ''}}">
+                    <a href="{{ route('pengabdian.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Data pengabdian</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Anggota penelitian</div>
                     </a>
                 </li>
             </ul>
