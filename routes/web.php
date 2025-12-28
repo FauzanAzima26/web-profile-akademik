@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\KurikulumController as backendKurikulum;
 use App\Http\Controllers\Backend\JadwalKuliahController as backendJadwal;
 use App\Http\Controllers\Backend\PenelitianController as backendPenelitian;
 use App\Http\Controllers\Backend\PengabdianController as backendPengabdian;
+use App\Http\Controllers\Backend\PrestasiController as backendPrestasi;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -132,6 +133,12 @@ Route::prefix('penelitian/pengabdian')->group(function () {
     Route::delete('pengabdian/{id}/force-delete', [backendPengabdian::class, 'forceDelete'])->name('pengabdian.forceDelete');
     Route::resource('pengabdian', backendPengabdian::class)->names('pengabdian');
 });
+
+Route::get('data/prestasi', [backendPrestasi::class, 'getData'])->name('prestasi.data');
+Route::get('prestasi/sampah', [backendPrestasi::class, 'sampah'])->name('prestasi.sampah');
+Route::post('prestasi/{id}/restore', [backendPrestasi::class, 'restore'])->name('prestasi.restore');
+Route::delete('prestasi/{id}/force-delete', [backendPrestasi::class, 'forceDelete'])->name('prestasi.forceDelete');
+Route::resource('prestasi', backendPrestasi::class)->whereNumber('prestasi')->names('prestasi');
 
 /*
 

@@ -10,18 +10,15 @@ class Prestasi extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'prestasis';
+    protected $table = 'prestasi_mahasiswa';
 
     protected $fillable = [
         'judul',
-        'deskripsi',
+        'kategori',
+        'tingkat',
         'tahun',
-        'gambar',
-        'user_id',
+        'mahasiswa',
+        'deskripsi',
+        'foto',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

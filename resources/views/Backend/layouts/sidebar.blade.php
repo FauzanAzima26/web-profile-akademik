@@ -155,15 +155,15 @@
         </li>
 
         <!-- prestasi dan galeri -->
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('prestasi.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-award"></i>
                 <div data-i18n="Layouts">Prestasi & Galeri</div>
             </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('prestasi.*') ? 'active' : '' }}">
+                    <a href="{{ route('prestasi.index') }}" class="menu-link">
                         <div data-i18n="Without menu">Prestasi Mahasiswa</div>
                     </a>
                 </li>
