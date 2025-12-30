@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\PenelitianController as backendPenelitian;
 use App\Http\Controllers\Backend\PengabdianController as backendPengabdian;
 use App\Http\Controllers\Backend\PrestasiController as backendPrestasi;
 use App\Http\Controllers\Backend\GaleriController as backendGaleri;
+use App\Http\Controllers\Backend\UserController as backendUser;
 use App\Http\Controllers\Frontend\GaleriController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\SejarahController;
@@ -148,6 +149,12 @@ Route::get('galeri/sampah', [backendGaleri::class, 'sampah'])->name('galeri.samp
 Route::post('galeri/{id}/restore', [backendGaleri::class, 'restore'])->name('galeri.restore');
 Route::delete('galeri/{id}/force-delete', [backendGaleri::class, 'forceDelete'])->name('galeri.forceDelete');
 Route::resource('galeri', backendGaleri::class)->whereNumber('galeri')->names('galeri');
+
+Route::get('data/user', [backendUser::class, 'getData'])->name('user.data');
+Route::get('user/sampah', [backendUser::class, 'sampah'])->name('user.sampah');
+Route::post('user/{id}/restore', [backendUser::class, 'restore'])->name('user.restore');
+Route::delete('user/{id}/force-delete', [backendUser::class, 'forceDelete'])->name('user.forceDelete');
+Route::resource('user', backendUser::class)->whereNumber('user')->names('user');
 /*
 
 |--------------------------------------------------------------------------

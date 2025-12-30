@@ -134,7 +134,7 @@
         </li>
 
         <!-- penelitian & pengabdian -->
-        <li class="menu-item {{ request()->routeIs('penelitian.*', 'pengabdian.*',) ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('penelitian.*', 'pengabdian.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-bulb"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
@@ -146,7 +146,7 @@
                         <div data-i18n="Without menu">Data penelitian</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->routeIs('pengabdian.*') ? 'active' : ''}}">
+                <li class="menu-item {{ request()->routeIs('pengabdian.*') ? 'active' : '' }}">
                     <a href="{{ route('pengabdian.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Data pengabdian</div>
                     </a>
@@ -167,7 +167,7 @@
                         <div data-i18n="Without menu">Prestasi Mahasiswa</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->routeIs('galeri.*') }}">
+                <li class="menu-item {{ request()->routeIs('galeri.*') ? 'active' : '' }}">
                     <a href="{{ route('galeri.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Galeri</div>
                     </a>
@@ -176,11 +176,23 @@
         </li>
 
         <!-- Manajemen user -->
-        <li class="menu-item">
-            <a href="" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Manajemen Pengguna</div>
             </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="{{ route('logout') }}" class="menu-link"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class="menu-icon tf-icons bx bx-log-out"></i>
+                <div data-i18n="Layouts">Logout</div>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </li>
 
     </ul>
