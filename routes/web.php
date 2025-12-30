@@ -49,123 +49,113 @@ Route::resource('prestasi', PrestasiController::class)->names('frontend.prestasi
 Route::resource('berita', BeritaController::class)->names('frontend.berita');
 Route::resource('galery', GaleriController::class)->names('frontend.galery');
 
+Route::middleware('auth')->group(function () {
+    Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
+    Route::prefix('management-konten')->group(function () {
 
-Route::resource('dashboard', dashboardController::class)->names('backend.dashboard');
-Route::prefix('management-konten')->group(function () {
+        Route::get('data/berita', [backendBerita::class, 'getData'])->name('backend.berita.data');
+        Route::get('berita/sampah', [backendBerita::class, 'sampah'])->name('berita.sampah');
+        Route::post('berita/{id}/restore', [backendBerita::class, 'restore'])->name('berita.restore');
+        Route::delete('berita/{id}/force-delete', [backendBerita::class, 'forceDelete'])->name('berita.forceDelete');
+        Route::get('/kategori-berita/list', [backendBerita::class, 'list']);
+        Route::resource('berita', backendBerita::class)->names('backend.berita');
 
-    Route::get('data/berita', [backendBerita::class, 'getData'])->name('backend.berita.data');
-    Route::get('berita/sampah', [backendBerita::class, 'sampah'])->name('berita.sampah');
-    Route::post('berita/{id}/restore', [backendBerita::class, 'restore'])->name('berita.restore');
-    Route::delete('berita/{id}/force-delete', [backendBerita::class, 'forceDelete'])->name('berita.forceDelete');
-    Route::get('/kategori-berita/list', [backendBerita::class, 'list']);
-    Route::resource('berita', backendBerita::class)->names('backend.berita');
+        Route::resource('kategori-berita', KategoriBeritaController::class)->names('backend.kategori-berita');
+        Route::get('data/kategori-berita', [KategoriBeritaController::class, 'data'])->name('backend.kategori-berita.data');
 
-    Route::resource('kategori-berita', KategoriBeritaController::class)->names('backend.kategori-berita');
-    Route::get('data/kategori-berita', [KategoriBeritaController::class, 'data'])->name('backend.kategori-berita.data');
+        Route::get('data/agenda', [backendAgenda::class, 'getData'])->name('backend.agenda.data');
+        Route::get('agenda/sampah', [backendAgenda::class, 'sampah'])->name('agenda.sampah');
+        Route::post('agenda/{id}/restore', [backendAgenda::class, 'restore'])->name('agenda.restore');
+        Route::delete('agenda/{id}/force-delete', [backendAgenda::class, 'forceDelete'])->name('agenda.forceDelete');
+        Route::resource('agenda', backendAgenda::class)->names('backend.agenda');
 
-    Route::get('data/agenda', [backendAgenda::class, 'getData'])->name('backend.agenda.data');
-    Route::get('agenda/sampah', [backendAgenda::class, 'sampah'])->name('agenda.sampah');
-    Route::post('agenda/{id}/restore', [backendAgenda::class, 'restore'])->name('agenda.restore');
-    Route::delete('agenda/{id}/force-delete', [backendAgenda::class, 'forceDelete'])->name('agenda.forceDelete');
-    Route::resource('agenda', backendAgenda::class)->names('backend.agenda');
+        Route::get('data/profil/prodi', [backendProfilProdi::class, 'getData'])->name('backend.profil.prodi.data');
+        Route::get('profil/prodi/sampah', [backendProfilProdi::class, 'sampah'])->name('backend.profil.prodi.sampah');
+        Route::post('profil/prodi/{id}/restore', [backendProfilProdi::class, 'restore'])->name('backend.profil.prodi.restore');
+        Route::delete('profil/prodi/{id}/force-delete', [backendProfilProdi::class, 'forceDelete'])->name('backend.profil.prodi.forceDelete');
+        Route::resource('profil/prodi', backendProfilProdi::class)->names('backend.profil.prodi');
 
-    Route::get('data/profil/prodi', [backendProfilProdi::class, 'getData'])->name('backend.profil.prodi.data');
-    Route::get('profil/prodi/sampah', [backendProfilProdi::class, 'sampah'])->name('backend.profil.prodi.sampah');
-    Route::post('profil/prodi/{id}/restore', [backendProfilProdi::class, 'restore'])->name('backend.profil.prodi.restore');
-    Route::delete('profil/prodi/{id}/force-delete', [backendProfilProdi::class, 'forceDelete'])->name('backend.profil.prodi.forceDelete');
-    Route::resource('profil/prodi', backendProfilProdi::class)->names('backend.profil.prodi');
-
-    Route::get('data/struktur/organisasi', [backendStrukturOrganisasi::class, 'getData'])->name('struktur.organisasi.data');
-    Route::get('struktur/organisasi/sampah', [backendStrukturOrganisasi::class, 'sampah'])->name('struktur.organisasi.sampah');
-    Route::post('struktur/organisasi/{id}/restore', [backendStrukturOrganisasi::class, 'restore'])->name('struktur.organisasi.restore');
-    Route::delete('struktur/organisasi/{id}/force-delete', [backendStrukturOrganisasi::class, 'forceDelete'])->name('struktur.organisasi.forceDelete');
-    Route::resource('struktur/organisasi', backendStrukturOrganisasi::class)->names('struktur.organisasi');
+        Route::get('data/struktur/organisasi', [backendStrukturOrganisasi::class, 'getData'])->name('struktur.organisasi.data');
+        Route::get('struktur/organisasi/sampah', [backendStrukturOrganisasi::class, 'sampah'])->name('struktur.organisasi.sampah');
+        Route::post('struktur/organisasi/{id}/restore', [backendStrukturOrganisasi::class, 'restore'])->name('struktur.organisasi.restore');
+        Route::delete('struktur/organisasi/{id}/force-delete', [backendStrukturOrganisasi::class, 'forceDelete'])->name('struktur.organisasi.forceDelete');
+        Route::resource('struktur/organisasi', backendStrukturOrganisasi::class)->names('struktur.organisasi');
 
 
-    Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
-    Route::resource('struktur', StrukturController::class)->names('frontend.struktur');
-    Route::resource('akreditasi', AkreditasiController::class)->names('frontend.akreditasi');
+        Route::resource('sejarah', SejarahController::class)->names('frontend.sejarah');
+        Route::resource('struktur', StrukturController::class)->names('frontend.struktur');
+        Route::resource('akreditasi', AkreditasiController::class)->names('frontend.akreditasi');
+    });
+
+    Route::prefix('management-akademik')->group(function () {
+
+        Route::get('data/dosen', [backendDosen::class, 'getData'])->name('dosen.data');
+        Route::get('dosen/sampah', [backendDosen::class, 'sampah'])->name('dosen.sampah');
+        Route::post('dosen/{id}/restore', [backendDosen::class, 'restore'])->name('dosen.restore');
+        Route::delete('dosen/{id}/force-delete', [backendDosen::class, 'forceDelete'])->name('dosen.forceDelete');
+        Route::resource('dosen', backendDosen::class)->names('dosen');
+
+        Route::get('data/bidang/keahlian', [backendBidangKeahlian::class, 'getData'])->name('bidang.keahlian.data');
+        Route::get('bidang/keahlian/sampah', [backendBidangKeahlian::class, 'sampah'])->name('bidang.keahlian.sampah');
+        Route::post('bidang/keahlian/{id}/restore', [backendBidangKeahlian::class, 'restore'])->name('bidang.keahlian.restore');
+        Route::delete('bidang/keahlian/{id}/force-delete', [backendBidangKeahlian::class, 'forceDelete'])->name('bidang.keahlian.forceDelete');
+        Route::resource('bidang/keahlian', backendBidangKeahlian::class)->names('bidang.keahlian');
+
+        Route::get('data/mata/kuliah', [backendMatakuliah::class, 'getData'])->name('mata.kuliah.data');
+        Route::get('mata/kuliah/sampah', [backendMatakuliah::class, 'sampah']);
+        Route::post('mata/kuliah/{id}/restore', [backendMatakuliah::class, 'restore']);
+        Route::delete('mata/kuliah/{id}/force-delete', [backendMatakuliah::class, 'forceDelete']);
+        Route::resource('mata/kuliah', backendMatakuliah::class)->names('mata.kuliah');
+
+        Route::get('data/kurikulum', [backendKurikulum::class, 'getData'])->name('kurikulum.data');
+        Route::get('kurikulum/sampah', [backendKurikulum::class, 'sampah']);
+        Route::post('kurikulum/{id}/restore', [backendKurikulum::class, 'restore']);
+        Route::delete('kurikulum/{id}/force-delete', [backendKurikulum::class, 'forceDelete']);
+        Route::resource('kurikulum', backendKurikulum::class)->names('kurikulum');
+
+        Route::get('data/jadwal/kuliah', [backendJadwal::class, 'getData'])->name('jadwal.kuliah.data');
+        Route::get('jadwal/kuliah/sampah', [backendJadwal::class, 'sampah']);
+        Route::post('jadwal/kuliah/{id}/restore', [backendJadwal::class, 'restore']);
+        Route::delete('jadwal/kuliah/{id}/force-delete', [backendJadwal::class, 'forceDelete']);
+        Route::resource('jadwal/kuliah', backendJadwal::class)->names('jadwal.kuliah');
+    });
+
+    Route::prefix('penelitian/pengabdian')->group(function () {
+
+        Route::get('data/penelitian', [backendPenelitian::class, 'getData'])->name('penelitian.data');
+        Route::get('penelitian/sampah', [backendPenelitian::class, 'sampah'])->name('penelitian.sampah');
+        Route::post('penelitian/{id}/restore', [backendPenelitian::class, 'restore'])->name('penelitian.restore');
+        Route::delete('penelitian/{id}/force-delete', [backendPenelitian::class, 'forceDelete'])->name('penelitian.forceDelete');
+        Route::resource('penelitian', backendPenelitian::class)->names('penelitian');
+        Route::get('/master/dosen', [backendDosen::class, 'list']);
+
+        Route::get('data/pengabdian', [backendPengabdian::class, 'getData'])->name('pengabdian.data');
+        Route::get('pengabdian/sampah', [backendPengabdian::class, 'sampah'])->name('pengabdian.sampah');
+        Route::post('pengabdian/{id}/restore', [backendPengabdian::class, 'restore'])->name('pengabdian.restore');
+        Route::delete('pengabdian/{id}/force-delete', [backendPengabdian::class, 'forceDelete'])->name('pengabdian.forceDelete');
+        Route::resource('pengabdian', backendPengabdian::class)->names('pengabdian');
+    });
+
+    Route::prefix('backend')->group(function () {
+        Route::get('data/prestasi', [backendPrestasi::class, 'getData'])->name('prestasi.data');
+        Route::get('prestasi/sampah', [backendPrestasi::class, 'sampah'])->name('prestasi.sampah');
+        Route::post('prestasi/{id}/restore', [backendPrestasi::class, 'restore'])->name('prestasi.restore');
+        Route::delete('prestasi/{id}/force-delete', [backendPrestasi::class, 'forceDelete'])->name('prestasi.forceDelete');
+        Route::resource('prestasi', backendPrestasi::class)->whereNumber('prestasi')->names('prestasi');
+    });
+
+    Route::get('data/galeri', [backendGaleri::class, 'getData'])->name('galeri.data');
+    Route::get('galeri/sampah', [backendGaleri::class, 'sampah'])->name('galeri.sampah');
+    Route::post('galeri/{id}/restore', [backendGaleri::class, 'restore'])->name('galeri.restore');
+    Route::delete('galeri/{id}/force-delete', [backendGaleri::class, 'forceDelete'])->name('galeri.forceDelete');
+    Route::resource('galeri', backendGaleri::class)->whereNumber('galeri')->names('galeri');
+
+    Route::get('data/user', [backendUser::class, 'getData'])->name('user.data');
+    Route::get('user/sampah', [backendUser::class, 'sampah'])->name('user.sampah');
+    Route::post('user/{id}/restore', [backendUser::class, 'restore'])->name('user.restore');
+    Route::delete('user/{id}/force-delete', [backendUser::class, 'forceDelete'])->name('user.forceDelete');
+    Route::resource('user', backendUser::class)->whereNumber('user')->names('user');
 });
-
-Route::prefix('management-akademik')->group(function () {
-
-    Route::get('data/dosen', [backendDosen::class, 'getData'])->name('dosen.data');
-    Route::get('dosen/sampah', [backendDosen::class, 'sampah'])->name('dosen.sampah');
-    Route::post('dosen/{id}/restore', [backendDosen::class, 'restore'])->name('dosen.restore');
-    Route::delete('dosen/{id}/force-delete', [backendDosen::class, 'forceDelete'])->name('dosen.forceDelete');
-    Route::resource('dosen', backendDosen::class)->names('dosen');
-
-    Route::get('data/bidang/keahlian', [backendBidangKeahlian::class, 'getData'])->name('bidang.keahlian.data');
-    Route::get('bidang/keahlian/sampah', [backendBidangKeahlian::class, 'sampah'])->name('bidang.keahlian.sampah');
-    Route::post('bidang/keahlian/{id}/restore', [backendBidangKeahlian::class, 'restore'])->name('bidang.keahlian.restore');
-    Route::delete('bidang/keahlian/{id}/force-delete', [backendBidangKeahlian::class, 'forceDelete'])->name('bidang.keahlian.forceDelete');
-    Route::resource('bidang/keahlian', backendBidangKeahlian::class)->names('bidang.keahlian');
-
-    Route::get('data/mata/kuliah', [backendMatakuliah::class, 'getData'])->name('mata.kuliah.data');
-    Route::get('mata/kuliah/sampah', [backendMatakuliah::class, 'sampah']);
-    Route::post('mata/kuliah/{id}/restore', [backendMatakuliah::class, 'restore']);
-    Route::delete('mata/kuliah/{id}/force-delete', [backendMatakuliah::class, 'forceDelete']);
-    Route::resource('mata/kuliah', backendMatakuliah::class)->names('mata.kuliah');
-
-    Route::get('data/kurikulum', [backendKurikulum::class, 'getData'])->name('kurikulum.data');
-    Route::get('kurikulum/sampah', [backendKurikulum::class, 'sampah']);
-    Route::post('kurikulum/{id}/restore', [backendKurikulum::class, 'restore']);
-    Route::delete('kurikulum/{id}/force-delete', [backendKurikulum::class, 'forceDelete']);
-    Route::resource('kurikulum', backendKurikulum::class)->names('kurikulum');
-
-    Route::get('data/jadwal/kuliah', [backendJadwal::class, 'getData'])->name('jadwal.kuliah.data');
-    Route::get('jadwal/kuliah/sampah', [backendJadwal::class, 'sampah']);
-    Route::post('jadwal/kuliah/{id}/restore', [backendJadwal::class, 'restore']);
-    Route::delete('jadwal/kuliah/{id}/force-delete', [backendJadwal::class, 'forceDelete']);
-    Route::resource('jadwal/kuliah', backendJadwal::class)->names('jadwal.kuliah');
-});
-
-Route::prefix('penelitian/pengabdian')->group(function () {
-
-    Route::get('data/penelitian', [backendPenelitian::class, 'getData'])->name('penelitian.data');
-    Route::get('penelitian/sampah', [backendPenelitian::class, 'sampah'])->name('penelitian.sampah');
-    Route::post('penelitian/{id}/restore', [backendPenelitian::class, 'restore'])->name('penelitian.restore');
-    Route::delete('penelitian/{id}/force-delete', [backendPenelitian::class, 'forceDelete'])->name('penelitian.forceDelete');
-    Route::resource('penelitian', backendPenelitian::class)->names('penelitian');
-    Route::get('/master/dosen', [backendDosen::class, 'list']);
-
-    Route::get('data/pengabdian', [backendPengabdian::class, 'getData'])->name('pengabdian.data');
-    Route::get('pengabdian/sampah', [backendPengabdian::class, 'sampah'])->name('pengabdian.sampah');
-    Route::post('pengabdian/{id}/restore', [backendPengabdian::class, 'restore'])->name('pengabdian.restore');
-    Route::delete('pengabdian/{id}/force-delete', [backendPengabdian::class, 'forceDelete'])->name('pengabdian.forceDelete');
-    Route::resource('pengabdian', backendPengabdian::class)->names('pengabdian');
-});
-
-Route::prefix('backend')->group(function () {
-    Route::get('data/prestasi', [backendPrestasi::class, 'getData'])->name('prestasi.data');
-    Route::get('prestasi/sampah', [backendPrestasi::class, 'sampah'])->name('prestasi.sampah');
-    Route::post('prestasi/{id}/restore', [backendPrestasi::class, 'restore'])->name('prestasi.restore');
-    Route::delete('prestasi/{id}/force-delete', [backendPrestasi::class, 'forceDelete'])->name('prestasi.forceDelete');
-    Route::resource('prestasi', backendPrestasi::class)->whereNumber('prestasi')->names('prestasi');
-});
-
-Route::get('data/galeri', [backendGaleri::class, 'getData'])->name('galeri.data');
-Route::get('galeri/sampah', [backendGaleri::class, 'sampah'])->name('galeri.sampah');
-Route::post('galeri/{id}/restore', [backendGaleri::class, 'restore'])->name('galeri.restore');
-Route::delete('galeri/{id}/force-delete', [backendGaleri::class, 'forceDelete'])->name('galeri.forceDelete');
-Route::resource('galeri', backendGaleri::class)->whereNumber('galeri')->names('galeri');
-
-Route::get('data/user', [backendUser::class, 'getData'])->name('user.data');
-Route::get('user/sampah', [backendUser::class, 'sampah'])->name('user.sampah');
-Route::post('user/{id}/restore', [backendUser::class, 'restore'])->name('user.restore');
-Route::delete('user/{id}/force-delete', [backendUser::class, 'forceDelete'])->name('user.forceDelete');
-Route::resource('user', backendUser::class)->whereNumber('user')->names('user');
-/*
-
-|--------------------------------------------------------------------------
-| BACKEND ROUTES (ADMIN PANEL)
-|--------------------------------------------------------------------------
-| Semua route backend disimpan di bawah prefix "backend"
-| dan dilindungi dengan middleware 'auth'
-Route::prefix('backend')->name('backend.')->middleware('auth')->group(function ()
-
-*/
-
 
 Auth::routes();
 

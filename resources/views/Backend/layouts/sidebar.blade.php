@@ -175,13 +175,15 @@
             </ul>
         </li>
 
-        <!-- Manajemen user -->
-        <li class="menu-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-            <a href="{{ route('user.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Layouts">Manajemen Pengguna</div>
-            </a>
-        </li>
+        @if (auth()->check() && auth()->user()->role->name === 'admin')
+            <!-- Manajemen user -->
+            <li class="menu-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="Layouts">Manajemen Pengguna</div>
+                </a>
+            </li>
+        @endif
 
         <li class="menu-item">
             <a href="{{ route('logout') }}" class="menu-link"
