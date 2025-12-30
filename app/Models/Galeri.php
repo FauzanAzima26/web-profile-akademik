@@ -10,17 +10,13 @@ class Galeri extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'galeris';
+    protected $table = 'galeri';
 
     protected $fillable = [
         'judul',
         'deskripsi',
         'gambar',
-        'user_id',
+        'kategori',
+        'status',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

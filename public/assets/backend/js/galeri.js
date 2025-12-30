@@ -1,11 +1,11 @@
 $(function () {
     let storeUrl = $("#formCreate").data("store");
-    let updateUrl = "/backend/prestasi";
+    let updateUrl = "/galeri";
 
-    let Table = $("#prestasiTable").DataTable({
+    let Table = $("#galeriTable").DataTable({
         processing: true,
         serverSide: true,
-        ajax: $("#prestasiTable").data("url"),
+        ajax: $("#galeriTable").data("url"),
         columns: [
             {
                 data: "DT_RowIndex",
@@ -18,26 +18,22 @@ $(function () {
                 name: "judul",
             },
             {
-                data: "kategori",
-                name: "kategori",
-            },
-            {
-                data: "tingkat",
-                name: "tingkat",
-            },
-            { data: "tahun", name: "tahun" },
-
-            {
-                data: "mahasiswa",
-                name: "mahasiswa",
-            },
-            {
                 data: "deskripsi",
                 name: "deskripsi",
             },
             {
-                data: "foto",
-                name: "foto",
+                data: "gambar",
+                name: "gambar",
+                orderable: false,
+                searchable: false,
+            },
+            {
+                data: "kategori",
+                name: "kategori",
+            },
+            {
+                data: "status",
+                name: "status",
                 orderable: false,
                 searchable: false,
             },
@@ -55,7 +51,7 @@ $(function () {
         $("#formCreate")[0].reset();
 
         // hapus id (penting!)
-        $("#prestasiId").val("");
+        $("#galeriId").val("");
 
         // hapus preview foto
         $("#previewFoto").html("");
@@ -72,7 +68,7 @@ $(function () {
     $("#formCreate").on("submit", function (e) {
         e.preventDefault();
 
-        let id = $("#prestasiId").val(); // ambil id, kosong = tambah
+        let id = $("#galeriId").val(); // ambil id, kosong = tambah
         let formData = new FormData(this);
 
         // Ambil URL update dari tombol edit jika ada
@@ -113,20 +109,18 @@ $(function () {
 
         let id = $(this).data("id");
 
-        $.get("/backend/prestasi/" + id, function (res) {
+        $.get("/galeri/" + id, function (res) {
             let data = res.data;
 
-            $("#prestasiId").val(id);
+            $("#galeriId").val(id);
             $("#judul").val(data.judul);
-            $("#kategori").val(data.kategori);
-            $("#tingkat").val(data.tingkat);
-            $("#tahun").val(data.tahun);
-            $("#mahasiswa").val(data.mahasiswa);
             $("#deskripsi").val(data.deskripsi);
+            $("#kategori").val(data.kategori);
+            $("#status").val(data.status);
 
-            if (data.foto) {
+            if (data.gambar) {
                 $("#previewFoto").html(
-                    `<img src="${data.foto}" class="img-fluid" style="max-height:200px;">`
+                    `<img src="${data.gambar}" class="img-fluid" style="max-height:200px;">`
                 );
             } else {
                 $("#previewFoto").html("Tidak ada Gambar");
@@ -135,6 +129,13 @@ $(function () {
             $("#modalTitle").text("Edit Data");
             $("#modalCreate").modal("show");
         });
+    });
+
+    $(document).on("click", ".preview-galeri", function () {
+        let img = $(this).data("img");
+
+        $("#previewGaleriImg").attr("src", img);
+        $("#modalPreviewGaleri").modal("show");
     });
 
     $(document).on("click", ".deleteBtn", function () {
@@ -150,7 +151,7 @@ $(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/backend/prestasi/" + id,
+                    url: "/galeri/" + id,
                     type: "POST", // method spoofing
                     data: {
                         _method: "DELETE",
@@ -177,7 +178,7 @@ $(function () {
 
     function fetchSampah() {
         $.ajax({
-            url: "/backend/prestasi/sampah",
+            url: "/galeri/sampah",
             type: "GET",
             success: function (res) {
                 let tbody = "";
@@ -194,20 +195,17 @@ $(function () {
                               )
                             : "-";
 
-                        let foto = item.foto
-                            ? `<img src="${item.foto}" class="img-thumbnail" style="max-height:80px;">`
-                            : `<span class="text-muted">Tidak ada foto</span>`;
+                        let gambar = item.gambar
+                            ? `<img src="${item.gambar}" class="img-thumbnail" style="max-height:80px;">`
+                            : `<span class="text-muted">Tidak ada gambar</span>`;
 
                         tbody += `
                         <tr>
                             <td>${item.judul}</td>
 
-                            <td>${item.kategori}</td>
-                            <td>${item.tingkat}</td>
-                            <td>${item.tahun}</td>
-                            <td>${item.mahasiswa}</td>
                             <td>${item.deskripsi}</td>
-                            <td>${foto}</td>
+                            <td>${gambar}</td>
+                            <td>${item.kategori}</td>
                             <td>${tanggalHapus}</td>
                             <td class="text-center">
                                 <button class="btn btn-success btn-sm restore-btn" data-id="${item.id}">
@@ -239,7 +237,7 @@ $(function () {
         let id = $(this).data("id");
 
         $.ajax({
-            url: `/backend/prestasi/${id}/restore`,
+            url: `/galeri/${id}/restore`,
             type: "POST",
             success: function (res) {
                 alert(res.message);
@@ -262,7 +260,7 @@ $(function () {
         let id = $(this).data("id");
 
         $.ajax({
-            url: `/backend/prestasi/${id}/force-delete`,
+            url: `/galeri/${id}/force-delete`,
             type: "POST",
             data: {
                 _method: "DELETE",

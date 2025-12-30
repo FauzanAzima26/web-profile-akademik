@@ -134,7 +134,7 @@
         </li>
 
         <!-- penelitian & pengabdian -->
-        <li class="menu-item {{ request()->routeIs('penelitian.*', 'pengabdian.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('penelitian.*', 'pengabdian.*',) ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-bulb"></i>
                 <div data-i18n="Layouts">Penelitian & Pengabdian</div>
@@ -155,7 +155,7 @@
         </li>
 
         <!-- prestasi dan galeri -->
-        <li class="menu-item {{ request()->routeIs('prestasi.*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->routeIs('prestasi.*', 'galeri.*') ? 'open' : '' }}">
             <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-award"></i>
                 <div data-i18n="Layouts">Prestasi & Galeri</div>
@@ -167,35 +167,9 @@
                         <div data-i18n="Without menu">Prestasi Mahasiswa</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('galeri.*') }}">
+                    <a href="{{ route('galeri.index') }}" class="menu-link">
                         <div data-i18n="Without navbar">Galeri</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Menu -->
-        <li class="menu-item">
-            <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-menu"></i>
-                <div data-i18n="Layouts">Menu & Navigasi</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Without menu">Menu dinamis</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Urutan menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Submenu</div>
                     </a>
                 </li>
             </ul>
@@ -203,28 +177,10 @@
 
         <!-- Manajemen user -->
         <li class="menu-item">
-            <a href="" class="menu-link menu-toggle">
+            <a href="" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Layouts">Manajemen Pengguna</div>
             </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Without menu">Menu dinamis</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Urutan menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Submenu</div>
-                    </a>
-                </li>
-            </ul>
         </li>
 
     </ul>
