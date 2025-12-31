@@ -40,4 +40,9 @@ class Dosen extends Model
         )
             ->withPivot('peran');
     }
+
+    public function jadwalKuliah()
+    {
+        return $this->hasMany(jadwalKuliah::class);
+    }
 }

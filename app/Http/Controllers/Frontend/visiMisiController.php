@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProfilProdi;
 use Illuminate\Http\Request;
 
 class visiMisiController extends Controller
@@ -12,7 +13,11 @@ class visiMisiController extends Controller
      */
     public function index()
     {
-        return view('Frontend.Profil.visi-misi');
+        $profil = ProfilProdi::all();
+
+        return view('Frontend.Profil.visi-misi', [
+            'profil' => $profil,
+        ]);
     }
 
     /**

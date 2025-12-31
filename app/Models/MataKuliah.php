@@ -18,4 +18,9 @@ class MataKuliah extends Model
         'semester',
         'deskripsi'
     ];
+
+    public function jadwalKuliah()
+    {
+        return $this->hasMany(jadwalKuliah::class);
+    }
 }

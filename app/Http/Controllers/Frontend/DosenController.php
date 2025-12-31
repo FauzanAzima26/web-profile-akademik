@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
 class DosenController extends Controller
@@ -12,7 +13,11 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('Frontend.Dosen.index');
+        $dosen = Dosen::with('bidangKeahlian')->get();
+
+        return view('Frontend.Dosen.index', [
+            'dosen' => $dosen,
+        ]);
     }
 
     /**

@@ -18,69 +18,23 @@
             </div>
 
             <div class="row">
-                <!-- Contoh 1 -->
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
-                        <div class="feature-visual text-center p-3">
-                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
-                                class="img-fluid rounded-circle" width="120">
-                        </div>
-                        <div class="feature-details text-center">
-                            <h4>Nama Dosen</h4>
-                            <p><strong>Bidang Keahlian:</strong> Teknik Sipil, Manajemen Konstruksi</p>
-                            <p><strong>Jabatan Akademik:</strong> Lektor Kepala</p>
-                            <p><strong>Kontak:</strong> email@example.com</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contoh 2 -->
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="250">
-                        <div class="feature-visual text-center p-3">
-                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
-                                class="img-fluid rounded-circle" width="120">
-                        </div>
-                        <div class="feature-details text-center">
-                            <h4>Nama Dosen</h4>
-                            <p><strong>Bidang Keahlian:</strong> Teknik Mesin, Material</p>
-                            <p><strong>Jabatan Akademik:</strong> Asisten Ahli</p>
-                            <p><strong>Kontak:</strong> dosen@example.com</p>
+                @foreach ($dosen as $item)
+                    <div class="col-lg-3 col-md-5">
+                        <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
+                            <div class="feature-visual text-center p-3">
+                                <img src="{{ Storage::url('dosen/' . $item->foto) }}" alt="Foto Dosen"
+                                    class="img-fluid rounded-circle" width="120">
+                            </div>
+                            <div class="feature-details text-center">
+                                <h4>{{ trim($item->gelar_depan . ' ' . $item->nama . ' ' . $item->gelar_belakang) }}</h4>
+                                <p><strong>NIP/NIDN:</strong> {{ $item->nidn }}</p>
+                                <p><strong>Bidang Keahlian:</strong> {{ $item->bidangKeahlian->nama ?? '-'}}</p>
+                                <p><strong>Jabatan Akademik:</strong> {{ $item->jabatan }}</p>
+                                <p><strong>Kontak:</strong> {{ $item->email }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Contoh 3 -->
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
-                        <div class="feature-visual text-center p-3">
-                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
-                                class="img-fluid rounded-circle" width="120">
-                        </div>
-                        <div class="feature-details text-center">
-                            <h4>Nama Dosen</h4>
-                            <p><strong>Bidang Keahlian:</strong> Industri, Supply Chain</p>
-                            <p><strong>Jabatan Akademik:</strong> Lektor</p>
-                            <p><strong>Kontak:</strong> nama@example.com</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contoh 4 -->
-                <div class="col-lg-3 col-md-5">
-                    <div class="feature-card" data-aos="flip-up" data-aos-delay="350">
-                        <div class="feature-visual text-center p-3">
-                            <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" alt="Foto Dosen"
-                                class="img-fluid rounded-circle" width="120">
-                        </div>
-                        <div class="feature-details text-center">
-                            <h4>Nama Dosen</h4>
-                            <p><strong>Bidang Keahlian:</strong> Kimia, Proses Industri</p>
-                            <p><strong>Jabatan Akademik:</strong> Guru Besar</p>
-                            <p><strong>Kontak:</strong> contact@example.com</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
 

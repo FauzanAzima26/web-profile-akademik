@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Galeri;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GaleriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('Frontend.galery.index');
+        $kategori = $request->get('kategori');
+
+        $galeri = Galeri::query()
+            ->when($kategori, fn($q) => $q->where('kategori', $kategori))
+            ->where('status', true)
+            ->latest()
+            ->paginate(9)
+            ->withQueryString(); // agar pagination tetap membawa filter
+
+        return view('frontend.galery.index', compact('galeri', 'kategori'));
     }
 
     /**

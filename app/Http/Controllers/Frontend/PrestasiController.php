@@ -2,17 +2,36 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Prestasi;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PrestasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('Frontend.prestasi.index');
+        $kategori = $request->kategori;
+        $tahun = $request->tahun;
+
+        $prestasi = Prestasi::query()
+            ->when($kategori, function ($q) use ($kategori) {
+                $q->where('kategori', $kategori);
+            })
+            ->when($tahun, function ($q) use ($tahun) {
+                $q->where('tahun', $tahun);
+            })
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('frontend.prestasi.index', compact(
+            'prestasi',
+            'kategori',
+            'tahun'
+        ));
     }
 
     /**

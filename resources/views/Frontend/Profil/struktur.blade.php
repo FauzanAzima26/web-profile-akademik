@@ -20,68 +20,50 @@
             <div class="organization-structure">
 
                 <!-- Pimpinan Utama -->
-                <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">
-                    <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                        width="150">
-                    <h4>KETUA</h4>
-                    <p>Nama Ketua</p>
-                </div>
+                @foreach ($struktur->where('urutan', 1) as $s)
+                    <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+                        <img src="{{ Storage::url('Struktur-Organisasi/' . $s->foto) }}" class="rounded-circle mb-3"
+                            width="150">
+                        <h4>{{ $s->jabatan }}</h4>
+                        <p>{{ $s->nama }}</p>
+                    </div>
+                @endforeach
 
                 <!-- Wakil Ketua -->
-                <div class="row justify-content-center mb-5">
-                    <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up" data-aos-delay="250">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="130">
-                        <h5>WAKIL KETUA</h5>
-                        <p>Nama Wakil Ketua</p>
+                @foreach ($struktur->where('urutan', 2) as $s)
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up" data-aos-delay="250">
+                            <img src="{{ Storage::url('Struktur-Organisasi/' . $s->foto) }}" class="rounded-circle mb-3"
+                                width="130">
+                            <h5>{{ $s->jabatan }}</h5>
+                            <p>{{ $s->nama }}</p>
+                        </div>
                     </div>
-                </div>
+                @endforeach
 
                 <!-- Kepala Bagian -->
                 <div class="row justify-content-center mb-5">
-                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="300">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="120">
-                        <h6>Kepala Bagian Akademik</h6>
-                        <p>Nama</p>
-                    </div>
-                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="350">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="120">
-                        <h6>Kepala Bagian Umum</h6>
-                        <p>Nama</p>
-                    </div>
-                    <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="400">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="120">
-                        <h6>Kepala Bagian Keuangan</h6>
-                        <p>Nama</p>
-                    </div>
+                    @foreach ($struktur->whereBetween('urutan', [3, 5]) as $s)
+                        <div class="col-lg-3 col-md-5 text-center" data-aos="fade-up" data-aos-delay="300">
+                            <img src="{{ Storage::url('Struktur-Organisasi/' . $s->foto) }}" class="rounded-circle mb-3"
+                                width="120">
+                            <h6>{{ $s->jabatan }}</h6>
+                            <p>{{ $s->nama }}</p>
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Staf -->
                 <div class="row justify-content-center">
-                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="450">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="100">
-                        <p>Staf 1</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="500">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="100">
-                        <p>Staf 2</p>
-                    </div>
-                    <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="550">
-                        <img src="{{ asset('assets/frontend/img/download (4).jpg') }}" class="rounded-circle mb-3"
-                            width="100">
-                        <p>Staf 3</p>
-                    </div>
+                    @foreach ($struktur->where('urutan', '>', '5') as $s)
+                        <div class="col-lg-2 col-md-4 text-center" data-aos="fade-up" data-aos-delay="450">
+                            <img src="{{ Storage::url('Struktur-Organisasi/' . $s->foto) }}" class="rounded-circle mb-3"
+                                width="100">
+                            <p>{{ $s->nama }}</p>
+                        </div>
+                    @endforeach
                 </div>
-
             </div>
-
-
         </div>
-
     </section><!-- /Struktur Organisasi Section -->
 @endsection

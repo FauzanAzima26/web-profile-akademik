@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agenda;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class homeController extends Controller
@@ -12,7 +14,13 @@ class homeController extends Controller
      */
     public function index()
     {
-        return view('Frontend.home.index');
+        $berita = Berita::with('kategori')->get();
+        $agenda = Agenda::all();
+
+        return view('Frontend.home.index', [
+            'berita' => $berita,
+            'agenda' => $agenda
+        ]);
     }
 
     /**

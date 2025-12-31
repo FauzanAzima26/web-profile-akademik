@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\StrukturOrganisasi;
 use Illuminate\Http\Request;
 
 class StrukturController extends Controller
@@ -12,7 +13,11 @@ class StrukturController extends Controller
      */
     public function index()
     {
-        return view('Frontend.Profil.struktur');
+        $struktur = StrukturOrganisasi::orderBy('urutan', 'asc')->get();
+
+        return view('Frontend.Profil.struktur', [
+            'struktur' =>$struktur,
+        ]);
     }
 
     /**

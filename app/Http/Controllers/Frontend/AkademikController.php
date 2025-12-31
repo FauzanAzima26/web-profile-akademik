@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\JadwalKuliah;
+use App\Models\Kurikulum;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
 class AkademikController extends Controller
@@ -12,7 +15,15 @@ class AkademikController extends Controller
      */
     public function index()
     {
-        return view('Frontend.Akademik.index');
+        $mataKuliah = MataKuliah::all();
+        $kurikulum = Kurikulum::latest('tahun')->first();
+        $jadwal = JadwalKuliah::with(['mataKuliah', 'dosen'])->orderBy('hari')->orderBy('jam_mulai')->get();
+
+        return view('Frontend.Akademik.index', [
+            'mataKuliah' => $mataKuliah,
+            'kurikulum' => $kurikulum,
+            'jadwal' =>$jadwal,
+        ]);
     }
 
     /**

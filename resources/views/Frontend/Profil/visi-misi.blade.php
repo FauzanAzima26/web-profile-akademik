@@ -8,25 +8,24 @@
 
             <div class="row gy-4 align-items-center">
 
-                <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-                    <div class="about-content">
-                        <h2>Visi dan Misi</h2>
-                        <p class="lead">Where luxury meets tranquility in the heart of nature's paradise.</p>
-                        <p>Nestled among rolling hills and pristine landscapes, Grandview Resort has been offering
-                            exceptional hospitality for over three decades. Our commitment to excellence and attention to
-                            detail creates an unforgettable experience for discerning travelers seeking both comfort and
-                            adventure.</p>
-                        <p>From our elegantly appointed suites to our world-class amenities, every aspect of your stay is
-                            designed to exceed expectations. Discover breathtaking views, exquisite dining, and personalized
-                            service that makes every moment special.</p>
-                    </div>
-                </div><!-- End About Content -->
+                @foreach ($profil as $p)
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+                        <div class="about-content">
+                            <h2>Visi dan Misi</h2>
+                            <p class="lead">Program Studi {{ $p->nama_prodi }}</p>
+                            <h4>Visi</h4>
+                            <p>{{ $p->visi }}</p>
+                            <h4>Misi</h4>
+                            <p>{{ $p->misi }}</p>
+                        </div>
+                    </div><!-- End About Content -->
+                @endforeach
 
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                     <div class="about-images">
                         <div class="main-image">
-                            <img src="{{ asset('assets/frontend') }}/img/download (2).jpg"
-                                alt="Grandview Resort Main View" class="img-fluid">
+                            <img src="{{ asset('assets/frontend') }}/img/download (2).jpg" alt="Grandview Resort Main View"
+                                class="img-fluid">
                         </div>
                         <div class="secondary-image">
                             <img src="{{ asset('assets/frontend') }}/img/download (3).jpg" alt="Luxury Suite Interior"

@@ -2,64 +2,78 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Agenda;
+use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class BeritaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('Frontend.berita.index');
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(Request $request)
     {
-        //
-    }
+        $kategori = $request->kategori;
+        $tahun = $request->tahun;
+        $perPage = 6;
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Query dasar
+        if ($kategori === 'berita') {
+            $query = Berita::where('is_published', true);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            if ($tahun) {
+                $query->whereYear('published_at', $tahun);
+            }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+            $items = $query->latest('published_at')->paginate($perPage);
+        } elseif ($kategori === 'agenda') {
+            $query = Agenda::query();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+            if ($tahun) {
+                $query->whereYear('tanggal_mulai', $tahun);
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            $items = $query->latest('tanggal_mulai')->paginate($perPage);
+        } else {
+            // Gabungkan berita dan agenda
+            $berita = Berita::where('is_published', true);
+            $agenda = Agenda::query();
+
+            if ($tahun) {
+                $berita->whereYear('published_at', $tahun);
+                $agenda->whereYear('tanggal_mulai', $tahun);
+            }
+
+            $beritaItems = $berita->latest('published_at')->get();
+            $agendaItems = $agenda->latest('tanggal_mulai')->get();
+
+            // Gabungkan dan urutkan
+            $combined = $beritaItems->concat($agendaItems)
+                ->sortByDesc(function ($item) {
+                    return $item instanceof Berita
+                        ? $item->published_at
+                        : $item->tanggal_mulai;
+                });
+
+            // Manual pagination
+            $page = $request->page ?? 1;
+            $paginatedItems = new \Illuminate\Pagination\LengthAwarePaginator(
+                $combined->forPage($page, $perPage),
+                $combined->count(),
+                $perPage,
+                $page,
+                [
+                    'path' => $request->url(),
+                    'query' => $request->query()
+                ]
+            );
+
+            $items = $paginatedItems;
+        }
+
+        return view('frontend.berita.index', [
+            'items' => $items
+        ]);
     }
 }

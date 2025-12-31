@@ -17,111 +17,96 @@
 
         <!-- Filter -->
         <div class="row mb-4 justify-content-center">
-            <div class="col-md-4 mb-2">
-                <select id="filterKategori" class="form-select">
-                    <option value="">Semua Kategori</option>
-                    <option value="akademik">Akademik</option>
-                    <option value="non-akademik">Non Akademik</option>
-                    <option value="kompetisi">Kompetisi</option>
-                    <option value="organisasi">Organisasi</option>
-                </select>
-            </div>
+            <form method="GET" action="{{ url('/prestasi') }}">
+                <div class="row mb-4 justify-content-center">
 
-            <div class="col-md-3 mb-2">
-                <select id="filterTahun" class="form-select">
-                    <option value="">Semua Tahun</option>
-                    @for ($i = date('Y'); $i >= 2000; $i--)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                    @endfor
-                </select>
-            </div>
+                    <div class="col-md-4 mb-2">
+                        <select name="kategori" class="form-select">
+                            <option value="">Semua Kategori</option>
+                            @foreach (['akademik', 'non-akademik'] as $k)
+                                <option value="{{ $k }}" {{ request('kategori') == $k ? 'selected' : '' }}>
+                                    {{ ucwords(str_replace('-', ' ', $k)) }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-            <div class="col-md-2 mb-2">
-                <button class="btn btn-primary w-100" id="btnFilter">Filter</button>
-            </div>
+                    <div class="col-md-3 mb-2">
+                        <select name="tahun" class="form-select">
+                            <option value="">Semua Tahun</option>
+                            @for ($i = date('Y'); $i >= 2000; $i--)
+                                <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>
+                                    {{ $i }}
+                                </option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 mb-2">
+                        <button class="btn btn-primary w-100">
+                            <i class="fas fa-filter me-1"></i> Filter
+                        </button>
+                    </div>
+
+                </div>
+            </form>
         </div>
 
         <!-- Card List -->
         <div class="row g-4">
-            <!-- Card Example 1 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Prestasi">
+            @forelse ($prestasi as $p)
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
 
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-primary mb-2 text-capitalize">akademik</span>
+                        {{-- FOTO --}}
+                        @if ($p->foto)
+                            <img src="{{ asset('storage/prestasi/' . $p->foto) }}" class="card-img-top"
+                                alt="{{ $p->judul }}">
+                        @else
+                            <img src="https://via.placeholder.com/400x250?text=Prestasi" class="card-img-top"
+                                alt="Prestasi">
+                        @endif
 
-                        <h5 class="fw-bold">Lorem ipsum dolor sit amet</h5>
+                        <div class="card-body d-flex flex-column">
 
-                        <p class="text-muted small mb-1">Mahasiswa: Lorem Ipsum</p>
-                        <p class="text-muted small mb-2">Tahun: 2023</p>
+                            {{-- KATEGORI --}}
+                            <span class="badge bg-primary mb-2 text-capitalize">
+                                {{ $p->kategori }}
+                            </span>
 
-                        <p class="flex-grow-1">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Integer nec odio. Praesent libero.
-                        </p>
+                            {{-- JUDUL --}}
+                            <h5 class="fw-bold">{{ $p->judul }}</h5>
 
-                        <a href="#" class="btn btn-outline-primary mt-auto">Detail</a>
+                            {{-- META --}}
+                            <p class="text-muted small mb-1">
+                                Mahasiswa: {{ $p->mahasiswa }}
+                            </p>
+                            <p class="text-muted small mb-1">
+                                Tingkat: {{ $p->tingkat }}
+                            </p>
+                            <p class="text-muted small mb-2">
+                                Tahun: {{ $p->tahun }}
+                            </p>
+
+                            {{-- DESKRIPSI --}}
+                            <p class="flex-grow-1">
+                                {{ Str::limit(strip_tags($p->deskripsi), 120) }}
+                            </p>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-
-            <!-- Card Example 2 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Prestasi">
-
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-success mb-2 text-capitalize">non-akademik</span>
-
-                        <h5 class="fw-bold">Lorem ipsum dolor sit amet</h5>
-
-                        <p class="text-muted small mb-1">Mahasiswa: Lorem Ipsum</p>
-                        <p class="text-muted small mb-2">Tahun: 2022</p>
-
-                        <p class="flex-grow-1">
-                            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-                        </p>
-
-                        <a href="#" class="btn btn-outline-primary mt-auto">Detail</a>
-                    </div>
+            @empty
+                <div class="col-12 text-center text-muted py-5">
+                    <i class="fas fa-trophy fa-2x mb-3"></i>
+                    <p class="mb-0">Data prestasi tidak ditemukan</p>
                 </div>
-            </div>
-
-            <!-- Card Example 3 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Prestasi">
-
-                    <div class="card-body d-flex flex-column">
-                        <span class="badge bg-warning mb-2 text-capitalize">kompetisi</span>
-
-                        <h5 class="fw-bold">Lorem ipsum dolor sit amet</h5>
-
-                        <p class="text-muted small mb-1">Mahasiswa: Lorem Ipsum</p>
-                        <p class="text-muted small mb-2">Tahun: 2024</p>
-
-                        <p class="flex-grow-1">
-                            Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
-                        </p>
-
-                        <a href="#" class="btn btn-outline-primary mt-auto">Detail</a>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
 
         <!-- Pagination -->
         <div class="mt-4 d-flex justify-content-center">
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a class="page-link">Previous</a></li>
-                    <li class="page-item active"><a class="page-link">1</a></li>
-                    <li class="page-item"><a class="page-link">2</a></li>
-                    <li class="page-item"><a class="page-link">Next</a></li>
-                </ul>
-            </nav>
+            {{ $prestasi->links() }}
         </div>
-
     </div>
 @endsection
